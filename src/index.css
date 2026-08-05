@@ -108,6 +108,7 @@ button {
   border-radius: 8px;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35);
 }
@@ -126,12 +127,68 @@ button {
   border-radius: 8px;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
 }
 
 .btn-outline:hover {
   border-color: rgba(255, 255, 255, 0.3);
   background: rgba(255, 255, 255, 0.05);
+}
+
+/* Header & Controls Panel Layout */
+.header-flex-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.header-brand-container {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header-action-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.month-select-btn {
+  background: rgba(18, 24, 38, 0.9);
+  color: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Navigation Tab Bar Container */
+.tab-bar-container {
+  display: flex;
+  gap: 8px;
+  margin: 20px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 12px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.tab-bar-container::-webkit-scrollbar {
+  height: 4px;
+}
+
+.tab-bar-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
 }
 
 /* Navigation Tab Buttons (White Text on Black Background with White Outline) */
@@ -143,12 +200,14 @@ button {
   border-radius: 8px;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .tab-btn:hover {
@@ -163,4 +222,61 @@ button {
   color: #f59e0b !important;
   border: 2px solid #ffffff !important;
   box-shadow: 0 0 14px rgba(255, 255, 255, 0.4);
+}
+
+/* Mobile & Tablet Responsive Media Queries */
+@media (max-width: 900px) {
+  .header-flex-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .header-brand-container {
+    margin-bottom: 4px;
+  }
+
+  .header-action-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 8px;
+  }
+
+  .month-select-btn,
+  .header-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .tab-bar-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-bottom: 12px;
+  }
+
+  .tab-btn {
+    flex: 1 1 calc(50% - 6px);
+    min-width: 140px;
+    padding: 10px 12px;
+    font-size: 0.8rem;
+    justify-content: center;
+    white-space: normal;
+    text-align: center;
+  }
+}
+
+@media (max-width: 540px) {
+  .header-action-container {
+    grid-template-columns: 1fr;
+  }
+
+  .tab-btn {
+    flex: 1 1 100%;
+    min-width: 100%;
+  }
+
+  .app-main-wrapper {
+    padding: 12px 8px !important;
+  }
 }

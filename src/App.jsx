@@ -56,7 +56,7 @@ export default function App() {
   };
 
   return (
-    <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '24px 16px' }}>
+    <div className="app-main-wrapper" style={{ maxWidth: '1280px', margin: '0 auto', padding: '24px 16px' }}>
       
       {/* Main Mission Control Dashboard UI (Hidden when printing Executive Memo) */}
       <div className="no-print">
@@ -75,15 +75,8 @@ export default function App() {
         {/* Top KPI Metrics Bar */}
         <MetricsOverview monthData={currentMonth} auditResult={auditResult} />
 
-        {/* Navigation Tabs */}
-        <div style={{
-          display: 'flex',
-          gap: '8px',
-          margin: '20px 0',
-          borderBottom: '1px solid var(--border-subtle)',
-          paddingBottom: '12px',
-          overflowX: 'auto'
-        }}>
+        {/* Navigation Tabs Container */}
+        <div className="tab-bar-container">
           <button 
             className={`tab-btn ${activeTab === 'ROOM_YIELD' ? 'active' : ''}`}
             onClick={() => setActiveTab('ROOM_YIELD')}
@@ -156,9 +149,7 @@ export default function App() {
 
           {activeTab === 'VENDOR_CONTRACTS' && (
             <VendorContractsTab 
-              allMonths={allMonths}
               currentMonth={currentMonth}
-              prevMonth={prevMonth}
               auditResult={auditResult}
             />
           )}
@@ -174,14 +165,14 @@ export default function App() {
         </main>
       </div>
 
-      {/* Spreadsheet Import Dropzone Modal */}
+      {/* Upload Spreadsheet Modal */}
       <UploadDropzone 
         isOpen={isUploadOpen}
         onClose={() => setIsUploadOpen(false)}
         onDataUploaded={handleDataUploaded}
       />
 
-      {/* Verbatim Executive PDF Report Modal */}
+      {/* Executive Memo Printable Modal */}
       <ExecutiveMemoModal 
         isOpen={isMemoOpen}
         onClose={() => setIsMemoOpen(false)}
