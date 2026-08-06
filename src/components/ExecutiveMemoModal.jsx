@@ -789,6 +789,68 @@ export default function ExecutiveMemoModal({ isOpen, onClose, allMonths = [], cu
               </div>
             </div>
 
+            {/* Ideal Lean Departmental Headcount Sizing Table for MD */}
+            <div className="paper-card" style={{ padding: '16px', borderRadius: '10px', background: '#ffffff', border: '1px solid #cbd5e1', marginTop: '14px' }}>
+              <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: '#0f172a', marginBottom: '8px' }}>
+                Ideal Departmental Headcount Demand Sizing Model (~150 Keys @ 55% Occupancy)
+              </h4>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.78rem' }}>
+                <thead>
+                  <tr style={{ borderBottom: '1.5px solid #cbd5e1', color: '#475569', textAlign: 'left', fontWeight: 700 }}>
+                    <th style={{ padding: '6px' }}>Department</th>
+                    <th style={{ padding: '6px' }}>Shift & Operational Load</th>
+                    <th style={{ padding: '6px', textAlign: 'center' }}>Target Headcount</th>
+                    <th style={{ padding: '6px', textAlign: 'right' }}>Target Base Salary (RM)</th>
+                    <th style={{ padding: '6px' }}>Benchmark Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style={{ borderBottom: '1px solid #e2e8f0' }}>
+                    <td style={{ padding: '6px', fontWeight: 700, color: '#1d4ed8' }}>Front Office</td>
+                    <td style={{ padding: '6px' }}>24/7 Coverage (3 Shifts + Night Audit)</td>
+                    <td style={{ padding: '6px', textAlign: 'center', fontWeight: 700 }}>6 – 8 Staff</td>
+                    <td style={{ padding: '6px', textAlign: 'right' }}>RM 18,000 – RM 24,000</td>
+                    <td style={{ padding: '6px', color: '#047857', fontWeight: 600 }}>0.05 Staff/Room (Standard)</td>
+                  </tr>
+                  <tr style={{ borderBottom: '1px solid #e2e8f0' }}>
+                    <td style={{ padding: '6px', fontWeight: 700, color: '#047857' }}>Housekeeping & Linen</td>
+                    <td style={{ padding: '6px' }}>~80 occupied rooms/day (15-16 rooms/person)</td>
+                    <td style={{ padding: '6px', textAlign: 'center', fontWeight: 700 }}>11 – 14 Staff</td>
+                    <td style={{ padding: '6px', textAlign: 'right' }}>RM 22,000 – RM 28,000</td>
+                    <td style={{ padding: '6px', color: '#047857', fontWeight: 600 }}>15-18 Room Shift Benchmark</td>
+                  </tr>
+                  <tr style={{ borderBottom: '1px solid #e2e8f0' }}>
+                    <td style={{ padding: '6px', fontWeight: 700, color: '#b45309' }}>F&B Serambi & Banquet</td>
+                    <td style={{ padding: '6px' }}>Breakfast, Serambi ala carte, Banquet events</td>
+                    <td style={{ padding: '6px', textAlign: 'center', fontWeight: 700 }}>10 – 14 Staff</td>
+                    <td style={{ padding: '6px', textAlign: 'right' }}>RM 24,000 – RM 34,000</td>
+                    <td style={{ padding: '6px', color: '#b45309', fontWeight: 600 }}>Supplement events w/ contract</td>
+                  </tr>
+                  <tr style={{ borderBottom: '1px solid #e2e8f0' }}>
+                    <td style={{ padding: '6px', fontWeight: 700, color: '#6d28d9' }}>Engineering & Maint.</td>
+                    <td style={{ padding: '6px' }}>24/7 technical on-call (HVAC/FCUs)</td>
+                    <td style={{ padding: '6px', textAlign: 'center', fontWeight: 700 }}>4 – 6 Staff</td>
+                    <td style={{ padding: '6px', textAlign: 'right' }}>RM 12,000 – RM 18,000</td>
+                    <td style={{ padding: '6px', color: '#047857', fontWeight: 600 }}>FCU upgrades reduce calls</td>
+                  </tr>
+                  <tr style={{ borderBottom: '1px solid #e2e8f0' }}>
+                    <td style={{ padding: '6px', fontWeight: 700, color: '#475569' }}>Admin, HR, Sales & Exec</td>
+                    <td style={{ padding: '6px' }}>GM, Controller, HR, Sales, Purchasing</td>
+                    <td style={{ padding: '6px', textAlign: 'center', fontWeight: 700 }}>8 – 10 Staff</td>
+                    <td style={{ padding: '6px', textAlign: 'right' }}>RM 35,000 – RM 50,000</td>
+                    <td style={{ padding: '6px', color: '#047857', fontWeight: 600 }}>Lean Executive Overhead</td>
+                  </tr>
+                  <tr style={{ fontWeight: 800, background: '#f8fafc' }}>
+                    <td style={{ padding: '6px', color: '#0f172a' }}>TOTAL LEAN TARGET</td>
+                    <td style={{ padding: '6px' }}>Full Hotel Operational Range</td>
+                    <td style={{ padding: '6px', textAlign: 'center', color: '#047857' }}>39 – 52 Staff</td>
+                    <td style={{ padding: '6px', textAlign: 'right', color: '#047857' }}>RM 111k – RM 154k</td>
+                    <td style={{ padding: '6px', color: '#0f172a' }}>0.40 – 0.50 Staff / Room Ratio</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
           </div>
 
           {/* ========================================================================= */}

@@ -84,5 +84,13 @@ ${(monthData.guestLaundry === 0 && occupancyPct > 50) ? '⚠️ NOTE: Guest Laun
 1. [Action Item 1]: ${(missingAccruals.length > 0) ? 'Direct Finance to immediately accrue unrecorded utility liabilities before closing monthly ledger balance.' : 'Maintain active rate yield discipline on high-demand weekend room blocks.'}
 2. [Action Item 2]: ${(yieldAnomaly) ? 'Re-align OTA distribution discount caps and review group sales contract rate minimums.' : 'Continue monitoring energy efficiency performance post-HVAC FCU upgrade.'}
 3. [Action Item 3]: Review fixed contract run-rates for SC Systems and BGD Access to ensure volume tier caps are fully enforced.
+
+7. WORKFORCE SIZING & P&L BREAKEVEN AUDIT (SPECIAL MD REPORT)
+- Ideal Lean Headcount Target: 45 – 60 total headcount (0.40 – 0.50 staff/room ratio vs KL benchmark of 0.40-0.60).
+- Target Basic Salary Pool: RM 120,000 – RM 160,000 / month (vs H1 baseline of RM 242.6k).
+- Departmental Sizing (55% Occupancy): Housekeeping (11-14 staff @ 15-16 rooms/person), Front Office (6-8 staff 24/7), F&B/Banquet (10-14 staff), Engineering (4-6 staff), Admin/Sales (8-10 staff).
+- Full P&L Breakeven Monthly Revenue: RM 722,766 / month (+53.0% top-line growth needed over RM 498k H1 avg).
+- Standalone Breakeven RevPAR Target: RM 131.09 / room night (e.g. 72% occupancy @ RM 182 ADR).
+- Dual-Engine Strategy Target RevPAR: RM 107.55 / room night (achieved with ~RM 103k/mo cost restructuring in labor & energy).
 `;
 }
