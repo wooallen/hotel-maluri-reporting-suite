@@ -1,3 +1,4 @@
+// Hotel Maluri Executive Financial Reporting Suite - Production Deployment v1.0.1
 import React, { useState, useMemo } from 'react';
 import Header from './components/Header';
 import MetricsOverview from './components/MetricsOverview';
