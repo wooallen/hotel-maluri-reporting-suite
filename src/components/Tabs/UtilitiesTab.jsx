@@ -173,7 +173,7 @@ export default function UtilitiesTab({ currentMonth }) {
               1. Electricity & HVAC Load (43.1% Share) · RISING 📈
             </h4>
             <p style={{ color: 'var(--text-muted)' }}>
-              Electricity (`904-U001`) is the largest single overhead cost, averaging <strong>RM 55,534.46 / month</strong> (H1 Total: <strong>RM 333,206.75</strong>). Costs grew <strong>+13.2% from Jan (RM 51.1k) to June (RM 57.9k)</strong>, plateauing at elevated summer levels following April's peak (RM 59,813.12). FCU replacements and 3-core motorized valve installations under Capex (`200-1000`) target a 10-15% kWh reduction.
+              Electricity (`904-U001`) is the largest single overhead cost, averaging <strong>RM 55,534.46 / month</strong> (H1 Total: <strong>RM 333,206.75</strong>). Costs grew <strong>+13.2% from Jan (RM 51.1k) to June (RM 57.9k)</strong>, plateauing at elevated tropical ambient cooling levels following April's peak (RM 59,813.12). FCU replacements and 3-core motorized valve installations under Capex (`200-1000`) target a 10-15% kWh reduction.
             </p>
           </div>
 
