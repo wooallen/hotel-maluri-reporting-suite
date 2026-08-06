@@ -155,42 +155,94 @@ export default function UtilitiesTab({ currentMonth }) {
         </div>
       </div>
 
-      {/* Deep-Dive Analysis Cards for the 6 Overhead Line Items */}
+        {/* Deep-Dive Analysis Cards for the 6 Overhead Line Items & Trend Insights */}
       <div className="glass-card" style={{ padding: '24px', borderLeft: '4px solid #f59e0b', background: 'rgba(18, 24, 38, 0.85)' }}>
-        <h3 style={{ fontSize: '1.05rem', fontWeight: 700, marginBottom: '14px', color: '#ffffff' }}>
-          Strategic Overhead Cost Analysis (6 Specified Line Items)
-        </h3>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', flexWrap: 'wrap', gap: '10px' }}>
+          <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#ffffff', margin: 0 }}>
+            Strategic Overhead Cost & Trend Analysis (6 Specified Line Items)
+          </h3>
+          <span style={{ background: 'rgba(239, 68, 68, 0.15)', color: '#ef4444', border: '1px solid rgba(239, 68, 68, 0.3)', padding: '4px 10px', borderRadius: '6px', fontSize: '0.78rem', fontWeight: 700 }}>
+            OVERHEAD TREND: RISING 📈 (+11.9% H1 Growth)
+          </span>
+        </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px', fontSize: '0.85rem', lineHeight: '1.6' }}>
           
           <div style={{ background: 'rgba(255,255,255,0.02)', padding: '16px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.05)' }}>
             <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: '#f59e0b', marginBottom: '4px' }}>
-              1. Electricity & HVAC Load (43.1% Share)
+              1. Electricity & HVAC Load (43.1% Share) · RISING 📈
             </h4>
             <p style={{ color: 'var(--text-muted)' }}>
-              Electricity (`904-U001`) is the largest single overhead cost, averaging <strong>RM 55,534.46 / month</strong> (H1 Total: <strong>RM 333,206.75</strong>). MoM analysis shows costs peaked in April at <strong>RM 59,813.12</strong> (+2.3% MoM following March's +21.2% post-Ramadan surge), driven by peak room occupancy (2,418 rooms sold / 58.4% occupancy) and heavy Hari Raya festive banquet & catering HVAC utilization. FCU replacements and 3-core motorized valve installations under Capex (`200-1000`) target a 10-15% kWh reduction.
+              Electricity (`904-U001`) is the largest single overhead cost, averaging <strong>RM 55,534.46 / month</strong> (H1 Total: <strong>RM 333,206.75</strong>). Costs grew <strong>+13.2% from Jan (RM 51.1k) to June (RM 57.9k)</strong>, plateauing at elevated summer levels following April's peak (RM 59,813.12). FCU replacements and 3-core motorized valve installations under Capex (`200-1000`) target a 10-15% kWh reduction.
             </p>
           </div>
 
           <div style={{ background: 'rgba(255,255,255,0.02)', padding: '16px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.05)' }}>
             <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: '#3b82f6', marginBottom: '4px' }}>
-              2. Outsourced Labour & Guard Security (38.3% Combined)
+              2. Outsourced Labour & Guard Security (38.3% Combined) · RISING 📈
             </h4>
             <p style={{ color: 'var(--text-muted)' }}>
-              Outsourced Labour (`901-2002`) averages <strong>RM 33,822.10 / month</strong> (26.3% share), peaking in June at RM 37,685.16. Security (`904-S002`) adds <strong>RM 15,502.23 / month</strong> (12.0% share). Contract staffing represents 38.3% of non-utility overheads, requiring fixed headcount caps during off-peak periods.
+              Outsourced Labour (`901-2002`) peaked in June at <strong>RM 37,685.16</strong> (+15.5% MoM jump / +10.5% over Jan), while Security (`904-S002`) rose to <strong>RM 18,499.10</strong> (+27.9% over Jan). Contract staffing represents 38.3% of non-utility overheads, absorbing permanent base salary savings.
             </p>
           </div>
 
           <div style={{ background: 'rgba(255,255,255,0.02)', padding: '16px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.05)' }}>
             <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: '#8b5cf6', marginBottom: '4px' }}>
-              3. Water, IT Support/SW & Gas (18.5% Combined)
+              3. Water, IT Support/SW & Gas (18.5% Combined) · MIXED ➡️
             </h4>
             <p style={{ color: 'var(--text-muted)' }}>
-              Water (`904-U002`) averages <strong>RM 11,681.73 / month</strong> (9.1%), IT Support/Software (`904-ITST`) averages <strong>RM 9,803.14 / month</strong> (7.6%), and Gas (`904-U005`) averages <strong>RM 2,359.53 / month</strong> (1.8%). All three items operate within predictable run-rate thresholds.
+              Water (`904-U002`) is flat at <strong>RM 11,935.95</strong> (-2.0% vs Jan), IT Support (`904-ITST`) is fixed at <strong>RM 8,073.00</strong>, while Gas (`904-U005`) rose <strong>+17.9%</strong> to <strong>RM 2,809.25</strong> post-Ramadan.
             </p>
           </div>
 
         </div>
+      </div>
+
+      {/* MANAGING DIRECTOR BREAKEVEN & REVPAR COVERAGE TARGET CARD */}
+      <div className="glass-card" style={{ padding: '24px', borderLeft: '4px solid #10b981', background: 'rgba(16, 185, 129, 0.04)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
+          <TrendingUp size={22} color="#10b981" />
+          <div>
+            <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#ffffff', margin: 0 }}>
+              Managing Director P&L Breakeven & RevPAR Coverage Targets
+            </h3>
+            <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', margin: 0 }}>
+              Required top-line revenue and room yield growth to cover total operational overheads (Net Contribution Margin: 85.6%)
+            </p>
+          </div>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '14px', marginBottom: '16px' }}>
+          
+          <div style={{ background: 'rgba(255,255,255,0.03)', padding: '14px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.08)' }}>
+            <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 600, display: 'block' }}>REVENUE TO COVER 6 OVERHEADS ONLY</span>
+            <span className="metric-value" style={{ fontSize: '1.2rem', color: '#f59e0b' }}>RM 150,588 / mo</span>
+            <span style={{ fontSize: '0.7rem', color: '#9ca3af', display: 'block', marginTop: '2px' }}>Requires +RM 27.11 RevPAR Lift</span>
+          </div>
+
+          <div style={{ background: 'rgba(255,255,255,0.03)', padding: '14px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.08)' }}>
+            <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 600, display: 'block' }}>FULL P&L BREAKEVEN TOP-LINE REVENUE</span>
+            <span className="metric-value" style={{ fontSize: '1.2rem', color: '#10b981' }}>RM 722,766 / mo</span>
+            <span style={{ fontSize: '0.7rem', color: '#10b981', display: 'block', marginTop: '2px' }}>+53.0% Top-Line Growth vs H1 Avg</span>
+          </div>
+
+          <div style={{ background: 'rgba(255,255,255,0.03)', padding: '14px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.08)' }}>
+            <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 600, display: 'block' }}>TARGET REVPAR FOR FULL BREAKEVEN</span>
+            <span className="metric-value" style={{ fontSize: '1.2rem', color: '#3b82f6' }}>RM 131.09 / room</span>
+            <span style={{ fontSize: '0.7rem', color: '#60a5fa', display: 'block', marginTop: '2px' }}>+56.0% Lift over RM 84.05 Baseline</span>
+          </div>
+
+          <div style={{ background: 'rgba(255,255,255,0.03)', padding: '14px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.08)' }}>
+            <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 600, display: 'block' }}>DUAL-ENGINE PATHWAY (COST OPTIMIZED)</span>
+            <span className="metric-value" style={{ fontSize: '1.2rem', color: '#8b5cf6' }}>RM 107.55 / room</span>
+            <span style={{ fontSize: '0.7rem', color: '#a78bfa', display: 'block', marginTop: '2px' }}>Requires -RM 103k Cost Savings</span>
+          </div>
+
+        </div>
+
+        <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: '1.5', margin: 0 }}>
+          <strong>Managing Director Guidance:</strong> To eliminate the monthly net loss of -RM 146,353 without structural cost cuts, Hotel Maluri must expand RevPAR from <strong>RM 84.05 to RM 131.09</strong> (achieved via 72% occupancy @ RM 182 ADR). Under the <em>Dual-Engine Strategy</em> (reducing foreign labor & capturing 10-15% HVAC electricity savings = -RM 103k/mo), the target RevPAR drops to <strong>RM 107.55</strong> (+27.9% lift).
+        </p>
       </div>
 
       {/* 6 Line Items Breakdown Table */}

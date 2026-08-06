@@ -567,39 +567,80 @@ export default function ExecutiveMemoModal({ isOpen, onClose, allMonths = [], cu
               </div>
             </div>
 
-            {/* VERBATIM MISSION CONTROL ANALYSIS CARD: Utility & Overheads */}
+            {/* VERBATIM MISSION CONTROL ANALYSIS CARD: Utility & Overheads & Trend Insights */}
             <div className="paper-card" style={{ padding: '18px', borderRadius: '10px', borderLeft: '4px solid #d97706', background: '#f8fafc', marginBottom: '16px' }}>
-              <h3 style={{ fontSize: '0.95rem', fontWeight: 800, color: '#0f172a', marginBottom: '10px' }}>
-                Strategic Overhead Cost Analysis (6 Specified Line Items)
-              </h3>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px', flexWrap: 'wrap', gap: '8px' }}>
+                <h3 style={{ fontSize: '0.95rem', fontWeight: 800, color: '#0f172a', margin: 0 }}>
+                  Strategic Overhead Cost & Trend Analysis (6 Specified Line Items)
+                </h3>
+                <span style={{ background: '#fef2f2', color: '#b91c1c', border: '1px solid #fca5a5', padding: '3px 8px', borderRadius: '4px', fontSize: '0.72rem', fontWeight: 800 }}>
+                  OVERHEAD TREND: RISING 📈 (+11.9% H1 Growth)
+                </span>
+              </div>
+
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '12px', fontSize: '0.81rem', lineHeight: '1.5' }}>
                 <div style={{ background: '#ffffff', padding: '12px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
                   <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: '#b45309', marginBottom: '4px' }}>
-                    1. Electricity & HVAC Load (43.1% Share)
+                    1. Electricity & HVAC Load (43.1% Share) · RISING 📈
                   </h4>
                   <p style={{ color: '#475569' }}>
-                    Electricity (`904-U001`) is the largest single overhead cost, averaging <strong>RM 55,534.46 / month</strong> (H1 Total: <strong>RM 333,206.75</strong>). MoM analysis shows costs peaked in April at <strong>RM 59,813.12</strong> (+2.3% MoM following March's +21.2% post-Ramadan surge), driven by peak room occupancy (2,418 rooms sold / 58.4% occupancy) and heavy Hari Raya festive banquet & catering HVAC utilization. FCU replacements and 3-core motorized valve wiring under Capex (`200-1000`) target a 10-15% kWh reduction.
+                    Electricity (`904-U001`) averages <strong>RM 55,534.46 / month</strong> (H1 Total: <strong>RM 333,206.75</strong>). Costs grew <strong>+13.2% from Jan (RM 51.1k) to June (RM 57.9k)</strong>, plateauing at elevated levels following April's peak (RM 59,813.12). FCU replacements and 3-core motorized valve installations under Capex (`200-1000`) target a 10-15% kWh reduction.
                   </p>
                 </div>
 
                 <div style={{ background: '#ffffff', padding: '12px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
                   <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: '#1d4ed8', marginBottom: '4px' }}>
-                    2. Outsourced Labour & Guard Security (38.3% Combined)
+                    2. Outsourced Labour & Guard Security (38.3% Combined) · RISING 📈
                   </h4>
                   <p style={{ color: '#475569' }}>
-                    Outsourced Labour (`901-2002`) averages <strong>RM 33,822.10 / month</strong> (26.3% share), peaking in June at RM 37,685.16. Security (`904-S002`) adds <strong>RM 15,502.23 / month</strong> (12.0% share). Contract staffing represents 38.3% of non-utility overheads.
+                    Outsourced Labour (`901-2002`) peaked in June at <strong>RM 37,685.16</strong> (+15.5% MoM jump / +10.5% over Jan), while Security (`904-S002`) rose to <strong>RM 18,499.10</strong> (+27.9% over Jan). Contract staffing represents 38.3% of non-utility overheads, absorbing permanent base salary savings.
                   </p>
                 </div>
 
                 <div style={{ background: '#ffffff', padding: '12px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
                   <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: '#6d28d9', marginBottom: '4px' }}>
-                    3. Water, IT Support/SW & Gas (18.5% Combined)
+                    3. Water, IT Support/SW & Gas (18.5% Combined) · MIXED ➡️
                   </h4>
                   <p style={{ color: '#475569' }}>
-                    Water (`904-U002`) averages <strong>RM 11,681.73 / month</strong> (9.1%), IT Support/Software (`904-ITST`) averages <strong>RM 9,803.14 / month</strong> (7.6%), and Gas (`904-U005`) averages <strong>RM 2,359.53 / month</strong> (1.8%).
+                    Water (`904-U002`) is flat at <strong>RM 11,935.95</strong> (-2.0% vs Jan), IT Support (`904-ITST`) is fixed at <strong>RM 8,073.00</strong>, while Gas (`904-U005`) rose <strong>+17.9%</strong> to <strong>RM 2,809.25</strong> post-Ramadan.
                   </p>
                 </div>
               </div>
+            </div>
+
+            {/* MANAGING DIRECTOR P&L BREAKEVEN & REVPAR COVERAGE CARD FOR PDF */}
+            <div className="paper-card" style={{ padding: '16px', borderRadius: '10px', borderLeft: '4px solid #059669', background: '#ecfdf5', marginBottom: '16px' }}>
+              <div style={{ fontSize: '0.72rem', fontWeight: 800, color: '#047857', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '4px' }}>
+                MANAGING DIRECTOR P&L BREAKEVEN & REVPAR COVERAGE TARGETS
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '10px', marginTop: '10px' }}>
+                <div style={{ background: '#ffffff', border: '1px solid #a7f3d0', borderRadius: '8px', padding: '10px' }}>
+                  <span style={{ fontSize: '0.68rem', fontWeight: 800, color: '#b45309', display: 'block' }}>COVER 6 OVERHEADS ONLY</span>
+                  <span style={{ fontSize: '1.05rem', fontWeight: 800, color: '#92400e' }}>RM 150,588 / mo</span>
+                  <span style={{ fontSize: '0.68rem', color: '#475569', display: 'block' }}>Requires +RM 27.11 RevPAR Lift</span>
+                </div>
+
+                <div style={{ background: '#ffffff', border: '1px solid #a7f3d0', borderRadius: '8px', padding: '10px' }}>
+                  <span style={{ fontSize: '0.68rem', fontWeight: 800, color: '#047857', display: 'block' }}>FULL BREAKEVEN REVENUE</span>
+                  <span style={{ fontSize: '1.05rem', fontWeight: 800, color: '#065f46' }}>RM 722,766 / mo</span>
+                  <span style={{ fontSize: '0.68rem', color: '#475569', display: 'block' }}>+53.0% Top-Line Growth Needed</span>
+                </div>
+
+                <div style={{ background: '#ffffff', border: '1px solid #a7f3d0', borderRadius: '8px', padding: '10px' }}>
+                  <span style={{ fontSize: '0.68rem', fontWeight: 800, color: '#1d4ed8', display: 'block' }}>TARGET BREAKEVEN REVPAR</span>
+                  <span style={{ fontSize: '1.05rem', fontWeight: 800, color: '#1e40af' }}>RM 131.09 / room</span>
+                  <span style={{ fontSize: '0.68rem', color: '#475569', display: 'block' }}>+56.0% Lift over RM 84.05 Baseline</span>
+                </div>
+
+                <div style={{ background: '#ffffff', border: '1px solid #a7f3d0', borderRadius: '8px', padding: '10px' }}>
+                  <span style={{ fontSize: '0.68rem', fontWeight: 800, color: '#6d28d9', display: 'block' }}>DUAL-ENGINE REVPAR TARGET</span>
+                  <span style={{ fontSize: '1.05rem', fontWeight: 800, color: '#5b21b6' }}>RM 107.55 / room</span>
+                  <span style={{ fontSize: '0.68rem', color: '#475569', display: 'block' }}>With -RM 103k/mo Cost Savings</span>
+                </div>
+              </div>
+              <p style={{ fontSize: '0.78rem', color: '#064e3b', marginTop: '10px', lineHeight: '1.5', margin: '10px 0 0 0' }}>
+                <strong>Strategic Executive Guidance:</strong> Net Contribution Margin stands at <strong>85.6%</strong>. To eliminate the monthly net loss of -RM 146,353 without cost cuts, RevPAR must reach <strong>RM 131.09</strong> (e.g. 72% occupancy @ RM 182 ADR). Under the <em>Dual-Engine Strategy</em> (cost reductions of ~RM 103k/mo in foreign labor and HVAC power), the target RevPAR drops to <strong>RM 107.55</strong> (+27.9% lift).
+              </p>
             </div>
 
             {/* Renovation Capex Table */}
