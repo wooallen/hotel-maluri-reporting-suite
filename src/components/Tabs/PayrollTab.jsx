@@ -251,6 +251,113 @@ export default function PayrollTab({ allMonths = [], currentMonth }) {
         </div>
       </div>
 
+      {/* NEW GLASS CARD: Managing Director P&L Breakeven & RevPAR Coverage Targets */}
+      <div className="glass-card" style={{ padding: '24px', borderLeft: '4px solid #10b981', background: 'rgba(18, 24, 38, 0.85)' }}>
+        <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#10b981', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '6px' }}>
+          MANAGING DIRECTOR P&L BREAKEVEN & REVPAR COVERAGE TARGETS
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '14px', marginTop: '12px' }}>
+          <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(245, 158, 11, 0.3)', borderRadius: '10px', padding: '14px' }}>
+            <span style={{ fontSize: '0.72rem', fontWeight: 800, color: '#f59e0b', display: 'block' }}>COVER 6 OVERHEADS ONLY</span>
+            <span style={{ fontSize: '1.2rem', fontWeight: 800, color: '#ffffff' }}>RM 150,588 / mo</span>
+            <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', display: 'block', marginTop: '2px' }}>Requires +RM 27.11 RevPAR Lift</span>
+          </div>
+
+          <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(16, 185, 129, 0.3)', borderRadius: '10px', padding: '14px' }}>
+            <span style={{ fontSize: '0.72rem', fontWeight: 800, color: '#10b981', display: 'block' }}>FULL BREAKEVEN REVENUE</span>
+            <span style={{ fontSize: '1.2rem', fontWeight: 800, color: '#10b981' }}>RM 722,766 / mo</span>
+            <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', display: 'block', marginTop: '2px' }}>+53.0% Top-Line Growth Needed</span>
+          </div>
+
+          <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(59, 130, 246, 0.3)', borderRadius: '10px', padding: '14px' }}>
+            <span style={{ fontSize: '0.72rem', fontWeight: 800, color: '#3b82f6', display: 'block' }}>TARGET BREAKEVEN REVPAR</span>
+            <span style={{ fontSize: '1.2rem', fontWeight: 800, color: '#3b82f6' }}>RM 131.09 / room</span>
+            <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', display: 'block', marginTop: '2px' }}>+56.0% Lift over RM 84.05 Baseline</span>
+          </div>
+
+          <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(139, 92, 246, 0.3)', borderRadius: '10px', padding: '14px' }}>
+            <span style={{ fontSize: '0.72rem', fontWeight: 800, color: '#8b5cf6', display: 'block' }}>DUAL-ENGINE REVPAR TARGET</span>
+            <span style={{ fontSize: '1.2rem', fontWeight: 800, color: '#8b5cf6' }}>RM 107.55 / room</span>
+            <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', display: 'block', marginTop: '2px' }}>With -RM 103k/mo Cost Savings</span>
+          </div>
+        </div>
+      </div>
+
+      {/* NEW GLASS CARD: Ideal Departmental Headcount Demand Sizing Model (~150 Keys @ 55% Occupancy) */}
+      <div className="glass-card" style={{ padding: '24px', borderLeft: '4px solid #10b981' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px', flexWrap: 'wrap', gap: '10px' }}>
+          <div>
+            <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#ffffff' }}>
+              Ideal Departmental Headcount Demand Sizing Model (~150 Keys @ 55% Occupancy)
+            </h3>
+            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+              Operational labor market benchmark model for Hotel Maluri (0.40 – 0.50 staff / room ratio benchmark)
+            </p>
+          </div>
+          <span style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', border: '1px solid rgba(16, 185, 129, 0.3)', fontSize: '0.75rem', padding: '4px 10px', borderRadius: '6px', fontWeight: 700 }}>
+            Target: 39 – 52 Staff (RM 111k – RM 154k/mo)
+          </span>
+        </div>
+
+        <div style={{ overflowX: 'auto' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem' }}>
+            <thead>
+              <tr style={{ borderBottom: '1px solid var(--border-subtle)', color: 'var(--text-muted)', textAlign: 'left' }}>
+                <th style={{ padding: '10px 12px' }}>Operational Department</th>
+                <th style={{ padding: '10px 12px' }}>Shift Coverage & Operational Load</th>
+                <th style={{ padding: '10px 12px', textAlign: 'center' }}>Target Headcount</th>
+                <th style={{ padding: '10px 12px', textAlign: 'right' }}>Target Base Salary (RM)</th>
+                <th style={{ padding: '10px 12px' }}>KL Benchmark Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
+                <td className="metric-value" style={{ padding: '10px 12px', color: '#3b82f6' }}>Front Office</td>
+                <td style={{ padding: '10px 12px' }}>24/7 Coverage (3 Shifts + Night Audit)</td>
+                <td style={{ padding: '10px 12px', textAlign: 'center', fontWeight: 700, color: '#ffffff' }}>6 – 8 Staff</td>
+                <td className="metric-value" style={{ padding: '10px 12px', textAlign: 'right', color: '#3b82f6' }}>RM 18,000 – RM 24,000</td>
+                <td style={{ padding: '10px 12px', color: '#10b981' }}>0.05 Staff/Room (Standard)</td>
+              </tr>
+              <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
+                <td className="metric-value" style={{ padding: '10px 12px', color: '#10b981' }}>Housekeeping & Linen</td>
+                <td style={{ padding: '10px 12px' }}>~80 occupied rooms/day (15-16 rooms/person)</td>
+                <td style={{ padding: '10px 12px', textAlign: 'center', fontWeight: 700, color: '#ffffff' }}>11 – 14 Staff</td>
+                <td className="metric-value" style={{ padding: '10px 12px', textAlign: 'right', color: '#10b981' }}>RM 22,000 – RM 28,000</td>
+                <td style={{ padding: '10px 12px', color: '#10b981' }}>15-18 Room Shift Benchmark</td>
+              </tr>
+              <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
+                <td className="metric-value" style={{ padding: '10px 12px', color: '#f59e0b' }}>F&B Serambi & Banquet</td>
+                <td style={{ padding: '10px 12px' }}>Breakfast buffet, Serambi ala carte, Banquet events</td>
+                <td style={{ padding: '10px 12px', textAlign: 'center', fontWeight: 700, color: '#ffffff' }}>10 – 14 Staff</td>
+                <td className="metric-value" style={{ padding: '10px 12px', textAlign: 'right', color: '#f59e0b' }}>RM 24,000 – RM 34,000</td>
+                <td style={{ padding: '10px 12px', color: '#f59e0b' }}>Supplement events w/ contract</td>
+              </tr>
+              <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
+                <td className="metric-value" style={{ padding: '10px 12px', color: '#8b5cf6' }}>Engineering & Maintenance</td>
+                <td style={{ padding: '10px 12px' }}>24/7 technical on-call (HVAC/FCU chillers)</td>
+                <td style={{ padding: '10px 12px', textAlign: 'center', fontWeight: 700, color: '#ffffff' }}>4 – 6 Staff</td>
+                <td className="metric-value" style={{ padding: '10px 12px', textAlign: 'right', color: '#8b5cf6' }}>RM 12,000 – RM 18,000</td>
+                <td style={{ padding: '10px 12px', color: '#10b981' }}>FCU upgrades reduce calls</td>
+              </tr>
+              <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
+                <td className="metric-value" style={{ padding: '10px 12px', color: '#9ca3af' }}>Admin, HR, Finance & Sales</td>
+                <td style={{ padding: '10px 12px' }}>General Manager, Controller, HR, Sales, Purchasing</td>
+                <td style={{ padding: '10px 12px', textAlign: 'center', fontWeight: 700, color: '#ffffff' }}>8 – 10 Staff</td>
+                <td className="metric-value" style={{ padding: '10px 12px', textAlign: 'right', color: '#ffffff' }}>RM 35,000 – RM 50,000</td>
+                <td style={{ padding: '10px 12px', color: '#10b981' }}>Lean Executive Overhead</td>
+              </tr>
+              <tr style={{ fontWeight: 700, background: 'rgba(255,255,255,0.04)' }}>
+                <td style={{ padding: '12px', color: '#ffffff' }}>TOTAL LEAN CORE TARGET</td>
+                <td style={{ padding: '12px', color: 'var(--text-muted)' }}>Full Hotel Operational Range</td>
+                <td style={{ padding: '12px', textAlign: 'center', color: '#10b981', fontSize: '0.95rem' }}>39 – 52 Staff</td>
+                <td className="metric-value" style={{ padding: '12px', textAlign: 'right', color: '#10b981', fontSize: '0.95rem' }}>RM 111,000 – RM 154,000</td>
+                <td style={{ padding: '12px', color: '#ffffff' }}>0.40 – 0.50 Staff / Room Ratio</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       {/* Detailed Payroll Breakdown Table */}
       <div className="glass-card" style={{ padding: '24px' }}>
         <h3 style={{ fontSize: '1.05rem', fontWeight: 700, marginBottom: '16px' }}>
