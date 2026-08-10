@@ -78,16 +78,269 @@ export const H1_2026_MONTHLY_DATA = [
     itSupportSC: 5400.00,
     parkingBGD: 1940.00,
     gajah3Rent: 2500.00,
+    carParkRevenue: 8556.60,
     banquetRevenue: 45334.79,
     serambiFB: 12187.13,
     breakfastPackage: 6606.96,
     netProfit: -192045.33,
     renovationCapex: [
-      { id: 'CAPEX-01', date: '2026-01-01', vendor: 'WINTER AIR-CONDITIONING SDN BHD', docNo: '13106', description: 'TO DISMANTLE EXISTING FCU INCOMING AND MOTORISE VALVE CONTROL', amount: 3000 },
-      { id: 'CAPEX-02', date: '2026-01-01', vendor: 'WINTER AIR-CONDITIONING SDN BHD', docNo: '13106', description: 'TO INSTALL NEW 3 CORE WIRING FOR INCOMING AND MOTORISE VALVE CONTROL', amount: 9000 },
-      { id: 'CAPEX-03', date: '2026-01-01', vendor: 'WINTER AIR-CONDITIONING SDN BHD', docNo: '13108', description: 'TO DISMANTLE EXISTING 1.5HP AND INSTALL 2.5HP FCU UNITS C/W FABRICATE DUCTING', amount: 6000 },
-      { id: 'CAPEX-04', date: '2026-01-01', vendor: 'WINTER AIR-CONDITIONING SDN BHD', docNo: '13108', description: 'TO REPLACE OF FCU BLOWER FAN MOTOR C/W TEST RUN UNIT', amount: 300 }
-    ]
+      {
+            "id": "CAPEX-01",
+            "date": "2026-01-01",
+            "docNo": "13106",
+            "vendor": "WINTER AIR-CONDITIONING SDN BHD",
+            "description": "TO DISMANTLE EXISTING FCU INCOMING AND MOTORISE VALE CONTROL",
+            "amount": 3000.0
+      },
+      {
+            "id": "CAPEX-02",
+            "date": "2026-01-01",
+            "docNo": "13106",
+            "vendor": "WINTER AIR-CONDITIONING SDN BHD",
+            "description": "TO INSTALL NEW 3 CORE WIRING FOR INCOMING AND MOTORISE VALE CONTROL",
+            "amount": 9000.0
+      },
+      {
+            "id": "CAPEX-03",
+            "date": "2026-01-01",
+            "docNo": "13108",
+            "vendor": "WINTER AIR-CONDITIONING SDN BHD",
+            "description": "TO DISMANTLE EXISTING 1.5HP AND INSTALL 2.5HP FCU UNITS C/W FABRICATE NEW DUCTING HEADER ETC",
+            "amount": 6000.0
+      },
+      {
+            "id": "CAPEX-04",
+            "date": "2026-01-01",
+            "docNo": "13108",
+            "vendor": "WINTER AIR-CONDITIONING SDN BHD",
+            "description": "TO REPLACE OF FCU BLOWER FAN MOTOR C/W TEST RUN UNIT IN ORDER",
+            "amount": 300.0
+      },
+      {
+            "id": "CAPEX-05",
+            "date": "2026-01-01",
+            "docNo": "IV-2511/03",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "RENTAL OF RORO BIN (4FT HEIGHT)",
+            "amount": 760.0
+      },
+      {
+            "id": "CAPEX-06",
+            "date": "2026-01-01",
+            "docNo": "IV-2512/08",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "TO SUPPLT & INSTALL TEMPERED CLEAR GLASS FOR SQUARE NIGHT STAND",
+            "amount": 440.0
+      },
+      {
+            "id": "CAPEX-07",
+            "date": "2026-01-01",
+            "docNo": "IV-2512/08",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "TO SUPPLT & INSTALL TEMPERED CLEAR GLASS FOR TABLE TOP 450MM X 395 (D SHAPE)",
+            "amount": 250.0
+      },
+      {
+            "id": "CAPEX-08",
+            "date": "2026-01-01",
+            "docNo": "IV-2512/08",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "TO SUPPLT & INSTALL TEMPERED CLEAR GLASS FOR TABEL TOP 900MM (ROOM 466)",
+            "amount": 390.0
+      },
+      {
+            "id": "CAPEX-09",
+            "date": "2026-01-01",
+            "docNo": "IV-2512/08",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "TO SUPPLT & INSTALL TEMPERED CLEAR GLASS FOR TABEL TOP 800MM (ROOM 366)",
+            "amount": 290.0
+      },
+      {
+            "id": "CAPEX-10",
+            "date": "2026-01-01",
+            "docNo": "IV-2512/08",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "TO SUPPLT & INSTALL TEMPERED CLEAR GLASS FOR TABEL TOP 900MM (ROOM 507)",
+            "amount": 390.0
+      },
+      {
+            "id": "CAPEX-11",
+            "date": "2026-01-01",
+            "docNo": "IV-2512/08",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "TO SUPPLT & INSTALL TEMPERED CLEAR GLASS FOR TABEL TOP 610MM (ROOM 507)",
+            "amount": 660.0
+      },
+      {
+            "id": "CAPEX-12",
+            "date": "2026-01-01",
+            "docNo": "IV-2512/09",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "TO HACK OFF EXISTING WALL AT 201 AND OFFICE AND MAKE GOOD",
+            "amount": 2000.0
+      },
+      {
+            "id": "CAPEX-13",
+            "date": "2026-01-01",
+            "docNo": "IV-2512/09",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "TO CONSTRUCT NEW ENTRANCE FOR ROOM 201",
+            "amount": 2500.0
+      },
+      {
+            "id": "CAPEX-14",
+            "date": "2026-01-01",
+            "docNo": "IV-2512/09",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "TO SUPPLY & INSTALL VINYL TILES TO FLOOR",
+            "amount": 2500.0
+      },
+      {
+            "id": "CAPEX-15",
+            "date": "2026-01-01",
+            "docNo": "IV-2512/09",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "TO CONSTRUCT NEW FULL HEIGHT 75MM DRYWALL PARTITION",
+            "amount": 1500.0
+      },
+      {
+            "id": "CAPEX-16",
+            "date": "2026-01-01",
+            "docNo": "IV-2512/09",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "TP SUPPLY & INSTALL FRAMELESS GLASS DOOR",
+            "amount": 3500.0
+      },
+      {
+            "id": "CAPEX-17",
+            "date": "2026-01-01",
+            "docNo": "IV-2512/09",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "PERIODUCALLY CLEANING, PROTECTION, PAINTING & MAKE GOOD",
+            "amount": 220.0
+      },
+      {
+            "id": "CAPEX-18",
+            "date": "2026-01-12",
+            "docNo": "2025121023",
+            "vendor": "ZULKIFLI BIN SAAD",
+            "description": "SAMPLE BATIK - BATIK PRINTING SIZE 3FT X 6FT INC DELIVERY CHARGES",
+            "amount": 80.0
+      },
+      {
+            "id": "CAPEX-19",
+            "date": "2026-01-12",
+            "docNo": "2025121023",
+            "vendor": "ZULKIFLI BIN SAAD",
+            "description": "48 BATIK PRINTING SIZE 3FT X 6FT PER ROOMS INC DELIVERY CHARGES",
+            "amount": 850.0
+      },
+      {
+            "id": "CAPEX-20",
+            "date": "2026-01-19",
+            "docNo": "13119",
+            "vendor": "WINTER AIR-CONDITIONING SDN BHD",
+            "description": "TO INSULATE  CHWS & CHWR PIPE WITH NEW PU CHEMICAL JACKETING INSULATION & GI COVER",
+            "amount": 136800.0
+      },
+      {
+            "id": "CAPEX-21",
+            "date": "2026-01-19",
+            "docNo": "13119",
+            "vendor": "WINTER AIR-CONDITIONING SDN BHD",
+            "description": "REPLACE CORRIDOR FCU GATE VALVE BEFORE BYPASS OF CHILLED WATER PIPE FOR LVL 2- 5",
+            "amount": 8500.0
+      },
+      {
+            "id": "CAPEX-22",
+            "date": "2026-01-19",
+            "docNo": "13119",
+            "vendor": "WINTER AIR-CONDITIONING SDN BHD",
+            "description": "DISMANTLE EXISTING INSULATION",
+            "amount": 30400.0
+      },
+      {
+            "id": "CAPEX-23",
+            "date": "2026-01-30",
+            "docNo": "IV-2601/03",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "PROGRESSIVE CLAIM NO. 5 (RETENTION) FOR 148 GUEST ROOM REFURNISHMENT WORKS - RETENTION SUM 2.5%",
+            "amount": 15750.0
+      },
+      {
+            "id": "CAPEX-24",
+            "date": "2026-01-30",
+            "docNo": "IV-2601/04",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "PROGRESSIVE CLAIM NO. 5 (RETENTION) FOR RENOVATION WORKS AT LIFT LOBBY - RETENTION SUM 2.5%",
+            "amount": 2106.88
+      },
+      {
+            "id": "CAPEX-25",
+            "date": "2026-01-30",
+            "docNo": "IV-2601/05",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "GUEST ROOM DOOR PAINTING",
+            "amount": 14800.0
+      },
+      {
+            "id": "CAPEX-26",
+            "date": "2026-01-30",
+            "docNo": "IV-2601/05",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "WIRING WORKS - ADDITIONAL POWER SOCKET TO AIR COND WALL",
+            "amount": 6660.0
+      },
+      {
+            "id": "CAPEX-27",
+            "date": "2026-01-30",
+            "docNo": "IV-2601/05",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "WIRING WORKS -  INSTALLATION OF WALL LIGHT",
+            "amount": 2500.0
+      },
+      {
+            "id": "CAPEX-28",
+            "date": "2026-01-30",
+            "docNo": "IV-2601/05",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "WIRING WORKS - WALL LIGHT ADJUSTMENT",
+            "amount": 900.0
+      },
+      {
+            "id": "CAPEX-29",
+            "date": "2026-01-30",
+            "docNo": "IV-2601/05",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "WIRING WORKS - TO SUPPLY KELUAR SIGN (RECESSED)",
+            "amount": 1880.0
+      },
+      {
+            "id": "CAPEX-30",
+            "date": "2026-01-30",
+            "docNo": "IV-2601/05",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "WIRING WORKS - TO SUPPLY EMERGENCY LIGHT",
+            "amount": 1680.0
+      },
+      {
+            "id": "CAPEX-31",
+            "date": "2026-01-30",
+            "docNo": "IV-2601/05",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "GUEST ROOM TABLE TOP 15MM POLISHED - MINI BAR TOP",
+            "amount": 900.0
+      },
+      {
+            "id": "CAPEX-32",
+            "date": "2026-01-30",
+            "docNo": "IV-2601/05",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "GUEST ROOM TABLE TOP 15MM POLISHED - MINI BAR FLOOR",
+            "amount": 400.0
+      }
+]
   },
   {
     monthKey: '2026-02',
@@ -122,11 +375,29 @@ export const H1_2026_MONTHLY_DATA = [
     itSupportSC: 5400.00,
     parkingBGD: 1940.00,
     gajah3Rent: 2500.00,
+    carParkRevenue: 4878.29,
     banquetRevenue: 43000.03,
     serambiFB: 20979.76,
     breakfastPackage: 6051.21,
     netProfit: -182643.76,
-    renovationCapex: []
+    renovationCapex: [
+      {
+            "id": "CAPEX-01",
+            "date": "2026-02-10",
+            "docNo": "466221226M",
+            "vendor": "GREEN RYAN PATRICK",
+            "description": "CAPEX - RENOVATION LEVEL 2 (LIFT GRAPHICS AND INSTALLATION)",
+            "amount": 1025.0
+      },
+      {
+            "id": "CAPEX-02",
+            "date": "2026-02-12",
+            "docNo": "IV-06667",
+            "vendor": "VENTINO CORPORATION SDN BHD",
+            "description": "Coolmate 40L Silent Minibar (Solid Door)",
+            "amount": 3300.0
+      }
+]
   },
   {
     monthKey: '2026-03',
@@ -161,15 +432,133 @@ export const H1_2026_MONTHLY_DATA = [
     itSupportSC: 5400.00,
     parkingBGD: 1940.00,
     gajah3Rent: 2500.00,
+    carParkRevenue: 4501.88,
     banquetRevenue: 47369.48,
     serambiFB: 101489.71,
     breakfastPackage: 8556.01,
     netProfit: -165774.49,
     renovationCapex: [
-      { id: 'CAPEX-05', date: '2026-03-24', vendor: 'WINTER AIR-CONDITIONING SDN BHD', docNo: '13132', description: 'TO FABRICATE AND INSTALL NEW DUCTING HEADER C/W EXTERNAL DRAIN PAN', amount: 9000 },
-      { id: 'CAPEX-06', date: '2026-03-24', vendor: 'WINTER AIR-CONDITIONING SDN BHD', docNo: '13132', description: 'TO INSTALL NEW FCU UNIT C/W CHWS & CHWR PIPING CONNECTION INSULATION', amount: 10800 },
-      { id: 'CAPEX-07', date: '2026-03-24', vendor: 'WINTER AIR-CONDITIONING SDN BHD', docNo: '13133', description: 'DISMANTLE FCU UNITS CORRIDOR 3 NOS STOREROOM', amount: 36400 }
-    ]
+      {
+            "id": "CAPEX-01",
+            "date": "2026-03-17",
+            "docNo": "IV-2603/01",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "TO DISMANTLE GUESTROOM CEILING INCLUDING CART AWAY DEBRIS & PROTECTION",
+            "amount": 7920.0
+      },
+      {
+            "id": "CAPEX-02",
+            "date": "2026-03-17",
+            "docNo": "IV-2603/01",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "TO MAKE GOOD OF CEILING",
+            "amount": 1400.0
+      },
+      {
+            "id": "CAPEX-03",
+            "date": "2026-03-17",
+            "docNo": "IV-2603/01",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "TO DISMANTLE WALKWAY CARPET",
+            "amount": 3500.0
+      },
+      {
+            "id": "CAPEX-04",
+            "date": "2026-03-17",
+            "docNo": "IV-2603/01",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "TO CUT CORRIDOR CEILING FOR AIR COND WORKS",
+            "amount": 880.0
+      },
+      {
+            "id": "CAPEX-05",
+            "date": "2026-03-17",
+            "docNo": "IV-2603/01",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "TO SUPPLY AND APPLY 2 COATS NIPPON SATINGLO CORRIDOR &  EMULSION PAINT CEILING",
+            "amount": 14000.0
+      },
+      {
+            "id": "CAPEX-06",
+            "date": "2026-03-17",
+            "docNo": "IV-2603/01",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "TO SUPPLY AND APPLY 2 COATS NIPPON SATINGLO LIFT LOBBY, EMULSION PAINT CEILING & GLASS ENAMEL PAINT ",
+            "amount": 1200.0
+      },
+      {
+            "id": "CAPEX-07",
+            "date": "2026-03-17",
+            "docNo": "IV-2603/01",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "TO SUPPLY & INSTALL VINYL TILES WITH GLUEDOWN SYSTEM C/W PVC SKIRTING",
+            "amount": 38000.0
+      },
+      {
+            "id": "CAPEX-08",
+            "date": "2026-03-17",
+            "docNo": "IV-2603/02",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "TO SUPPLY AND APPLY 2 COATS NIPPON SATINGLO TO STAFF LIFT LOBBY",
+            "amount": 4800.0
+      },
+      {
+            "id": "CAPEX-09",
+            "date": "2026-03-17",
+            "docNo": "IV-2603/02",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "TO SUPPLY AND APPLY 2 COATS EMULSION PAINT TO HK CUPBOARD",
+            "amount": 4600.0
+      },
+      {
+            "id": "CAPEX-10",
+            "date": "2026-03-17",
+            "docNo": "IV-2603/02",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "TO SUPPLY AND APPLY UNDERCOAT + 2 COATS OF GLOSS ENAMEL PAINT TO FIRE RATED DOOR FRAME AND DOOR",
+            "amount": 4960.0
+      },
+      {
+            "id": "CAPEX-11",
+            "date": "2026-03-17",
+            "docNo": "IV-2603/02",
+            "vendor": "JC2 DESIGN SDN BHD",
+            "description": "TO SUPPLY AND APPLY 2 COATS EMULSION PAINT FIRE STAIRS, ABCD WALL & CEILING, GLASS ENAMEL PAINT",
+            "amount": 20700.0
+      },
+      {
+            "id": "CAPEX-12",
+            "date": "2026-03-24",
+            "docNo": "13132",
+            "vendor": "WINTER AIR-CONDITIONING SDN BHD",
+            "description": "TO FABRICATE AND INSTALL NEW DUCTING HEADER C/W EXTERNAL DRAIN PAN AND PE INSULATION",
+            "amount": 9000.0
+      },
+      {
+            "id": "CAPEX-13",
+            "date": "2026-03-24",
+            "docNo": "13132",
+            "vendor": "WINTER AIR-CONDITIONING SDN BHD",
+            "description": "TO INSTALL NEW FCU UNIT C/W CHWS & CHWR PIPING CONNECTION INSULATION OF PU JACKETING ETC",
+            "amount": 10800.0
+      },
+      {
+            "id": "CAPEX-14",
+            "date": "2026-03-24",
+            "docNo": "13133",
+            "vendor": "WINTER AIR-CONDITIONING SDN BHD",
+            "description": "DISMANTLE FCU UNITS CORRIDOR 3 NOS STOREROOOM - MAKE OPEN AT EXISTING PLASTER CEILING FOR DISMANTLE",
+            "amount": 36400.0
+      },
+      {
+            "id": "CAPEX-15",
+            "date": "2026-03-24",
+            "docNo": "13133",
+            "vendor": "WINTER AIR-CONDITIONING SDN BHD",
+            "description": "DISMANTLE FCU UNITS CORRIDOR 3 NOS STOREROOOM - INSULATE BACK BOTH CHWS & CHWR PIPES",
+            "amount": 15600.0
+      }
+]
   },
   {
     monthKey: '2026-04',
@@ -204,6 +593,7 @@ export const H1_2026_MONTHLY_DATA = [
     itSupportSC: 5400.00,
     parkingBGD: 1940.00,
     gajah3Rent: 2500.00,
+    carParkRevenue: 8695.28,
     banquetRevenue: 79461.97,
     serambiFB: 4494.45,
     breakfastPackage: 6467.97,
@@ -243,6 +633,7 @@ export const H1_2026_MONTHLY_DATA = [
     itSupportSC: 5400.00,
     parkingBGD: 1940.00,
     gajah3Rent: 2500.00,
+    carParkRevenue: 5929.24,
     banquetRevenue: 32711.92,
     serambiFB: 6027.17,
     breakfastPackage: 3578.89,
@@ -276,12 +667,13 @@ export const H1_2026_MONTHLY_DATA = [
 
     sewerage: 12.00, // ANOMALY: Missing Accrual in June!
     gas: 2809.25,
-    electricity: 57878.55,
-    water: 11935.95,
+    electricity: 63944.21,
+    water: 13569.05,
     security: 18499.10,
     itSupportSC: 5400.00,
     parkingBGD: 1940.00,
     gajah3Rent: 2500.00,
+    carParkRevenue: 3860.37,
     banquetRevenue: 57628.85,
     serambiFB: 8834.33,
     breakfastPackage: 9060.81,

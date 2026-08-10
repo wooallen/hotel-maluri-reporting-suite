@@ -1,13 +1,17 @@
 import React from 'react';
-import { Building2, UploadCloud, FileText } from 'lucide-react';
+import { Building2, UploadCloud, FileText, CalendarRange } from 'lucide-react';
 
 export default function Header({ 
-  selectedMonth, 
-  availableMonths, 
-  onSelectMonth, 
+  selectedPeriodKey, 
+  selectedPeriod,
+  availableMonths = [], 
+  availableQuarters = [],
+  onSelectPeriod, 
   onOpenUpload, 
   onOpenMemo
 }) {
+  const isQuarterMode = selectedPeriod ? selectedPeriod.isQuarter : false;
+
   return (
     <header className="glass-card header-wrapper" style={{ padding: '16px 24px', marginBottom: '24px', borderRadius: '16px' }}>
       <div className="header-flex-container">
@@ -32,9 +36,19 @@ export default function Header({
                 HOTEL MALURI
               </h1>
               <span className="gold-badge">Mission Control H2</span>
+              {isQuarterMode ? (
+                <span style={{ fontSize: '0.72rem', background: '#3b82f6', color: '#ffffff', fontWeight: 700, padding: '3px 8px', borderRadius: '6px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                  <CalendarRange size={12} />
+                  Quarterly Analysis Mode
+                </span>
+              ) : (
+                <span style={{ fontSize: '0.72rem', background: 'rgba(255,255,255,0.1)', color: '#94a3b8', fontWeight: 600, padding: '3px 8px', borderRadius: '6px' }}>
+                  Monthly Analysis Mode
+                </span>
+              )}
             </div>
             <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
-              Monthly Financial Ingestion, Variance Audit & Managing Director Reporting Suite
+              Financial Ingestion, Variance Audit & Managing Director Reporting Suite
             </p>
           </div>
         </div>
@@ -42,17 +56,28 @@ export default function Header({
         {/* Action Controls Panel */}
         <div className="header-action-container">
           
-          {/* Month Selector */}
+          {/* Timeframe Selector Dropdown (Quarterly + Monthly) */}
           <select 
-            value={selectedMonth ? selectedMonth.monthKey : ''} 
-            onChange={(e) => onSelectMonth(e.target.value)}
+            value={selectedPeriodKey || ''} 
+            onChange={(e) => onSelectPeriod(e.target.value)}
             className="month-select-btn"
+            style={{ minWidth: '220px' }}
           >
-            {availableMonths.map(m => (
-              <option key={m.monthKey} value={m.monthKey}>
-                {m.monthName} {m.isH1Baseline ? '(H1 Baseline)' : '(Ingested)'}
-              </option>
-            ))}
+            <optgroup label="📊 Quarterly Reports (Jan-Mar, Apr-Jun)">
+              {availableQuarters.map(q => (
+                <option key={q.quarterKey} value={q.quarterKey}>
+                  {q.quarterName} {q.isH1Baseline ? '(H1 Baseline)' : '(Ingested)'}
+                </option>
+              ))}
+            </optgroup>
+
+            <optgroup label="📅 Monthly Reports">
+              {availableMonths.map(m => (
+                <option key={m.monthKey} value={m.monthKey}>
+                  {m.monthName} {m.isH1Baseline ? '(H1 Baseline)' : '(Ingested)'}
+                </option>
+              ))}
+            </optgroup>
           </select>
 
           {/* Upload Button */}
@@ -64,7 +89,7 @@ export default function Header({
           {/* Executive Memo Button */}
           <button className="btn-gold header-btn" onClick={onOpenMemo}>
             <FileText size={18} />
-            <span>Executive Memo</span>
+            <span>Executive Memo {isQuarterMode ? '(Quarterly)' : '(Monthly)'}</span>
           </button>
         </div>
 

@@ -6,6 +6,7 @@ import { FIXED_BASELINES } from '../constants/baselines';
  */
 export function runFinancialAudit(monthData, prevMonthData = null) {
   const alerts = [];
+  const mult = monthData.isQuarter ? (monthData.monthsCount || 3) : 1;
   
   // ----------------------------------------------------
   // Module 1: Room Division & Yield Tracking
@@ -43,85 +44,92 @@ export function runFinancialAudit(monthData, prevMonthData = null) {
   const water = monthData.water || 0;
   
   // 1. Sewerage Accrual Check (Baseline = RM 5,967.60)
-  if (sewerage < (FIXED_BASELINES.SEWERAGE_MONTHLY * 0.5)) {
+  const sewerageBase = FIXED_BASELINES.SEWERAGE_MONTHLY * mult;
+  if (sewerage < (sewerageBase * 0.5)) {
     alerts.push({
       id: 'UTILITY-SEWERAGE-MISSING',
       type: 'CRITICAL',
       category: 'Overhead Accrual',
       title: 'Missing Accrual: IWK Sewerage (904-U004)',
-      message: `Sewerage expense recorded at RM ${sewerage.toFixed(2)}, which is ${((1 - sewerage / FIXED_BASELINES.SEWERAGE_MONTHLY) * 100).toFixed(1)}% below the fixed run-rate baseline of RM ${FIXED_BASELINES.SEWERAGE_MONTHLY.toFixed(2)}.`,
-      recommendation: 'Post RM 5,967.60 accrual entry for IWK sewerage immediately to prevent artificial profit inflation.'
+      message: `Sewerage expense recorded at RM ${sewerage.toFixed(2)}, which is ${((1 - sewerage / sewerageBase) * 100).toFixed(1)}% below the fixed run-rate baseline of RM ${sewerageBase.toFixed(2)}.`,
+      recommendation: `Post RM ${sewerageBase.toFixed(2)} accrual entry for IWK sewerage immediately to prevent artificial profit inflation.`
     });
-  } else if (sewerage > (FIXED_BASELINES.SEWERAGE_MONTHLY * 1.25)) {
+  } else if (sewerage > (sewerageBase * 1.25)) {
     alerts.push({
       id: 'UTILITY-SEWERAGE-SPIKE',
       type: 'WARNING',
       category: 'Overhead Variance',
       title: 'Sewerage Rate Spike: IWK Sewerage (904-U004)',
-      message: `Sewerage charge recorded at RM ${sewerage.toFixed(2)} (+${(((sewerage - FIXED_BASELINES.SEWERAGE_MONTHLY) / FIXED_BASELINES.SEWERAGE_MONTHLY) * 100).toFixed(1)}% above fixed baseline RM ${FIXED_BASELINES.SEWERAGE_MONTHLY.toFixed(2)}).`,
+      message: `Sewerage charge recorded at RM ${sewerage.toFixed(2)} (+${(((sewerage - sewerageBase) / sewerageBase) * 100).toFixed(1)}% above fixed baseline RM ${sewerageBase.toFixed(2)}).`,
       recommendation: 'Check for back-billing adjustments or meter rate reclassifications from Indah Water Konsortium.'
     });
   }
 
   // 2. Gas Utility Accrual & Run-Rate Check (Baseline: RM 2,300 - RM 2,950)
-  if (gas < (FIXED_BASELINES.GAS_MIN_MONTHLY * 0.5)) {
+  const gasMinBase = FIXED_BASELINES.GAS_MIN_MONTHLY * mult;
+  const gasMaxBase = FIXED_BASELINES.GAS_MAX_MONTHLY * mult;
+  if (gas < (gasMinBase * 0.5)) {
     alerts.push({
       id: 'UTILITY-GAS-LOW',
       type: 'CRITICAL',
       category: 'Overhead Accrual',
       title: 'Missing Accrual: LPG Kitchen Gas (904-U005)',
-      message: `Kitchen Gas recorded at RM ${gas.toFixed(2)}, severely below baseline minimum run-rate of RM ${FIXED_BASELINES.GAS_MIN_MONTHLY.toFixed(2)}.`,
+      message: `Kitchen Gas recorded at RM ${gas.toFixed(2)}, severely below baseline minimum run-rate of RM ${gasMinBase.toFixed(2)}.`,
       recommendation: 'Check kitchen meter reading or confirm pending gas supplier invoices.'
     });
-  } else if (gas > (FIXED_BASELINES.GAS_MAX_MONTHLY * 1.2)) {
+  } else if (gas > (gasMaxBase * 1.2)) {
     alerts.push({
       id: 'UTILITY-GAS-HIGH',
       type: 'WARNING',
       category: 'Overhead Variance',
       title: 'LPG Gas Cost Spike (904-U005)',
-      message: `Kitchen Gas expense of RM ${gas.toFixed(2)} exceeds baseline maximum of RM ${FIXED_BASELINES.GAS_MAX_MONTHLY.toFixed(2)}.`,
+      message: `Kitchen Gas expense of RM ${gas.toFixed(2)} exceeds baseline maximum of RM ${gasMaxBase.toFixed(2)}.`,
       recommendation: 'Inspect kitchen gas burners, pipe fittings, and banquet usage intensity.'
     });
   }
 
   // 3. Electricity Run-Rate & Accrual Check (Baseline: RM 51,000 - RM 60,000)
-  if (electricity < 25000) {
+  const elecMinBase = 25000 * mult;
+  const elecMaxBase = 62000 * mult;
+  if (electricity < elecMinBase) {
     alerts.push({
       id: 'UTILITY-ELEC-MISSING',
       type: 'CRITICAL',
       category: 'Overhead Accrual',
       title: 'Missing Accrual: Electricity Utility (904-U001)',
-      message: `Electricity expense recorded at RM ${electricity.toFixed(2)} vs expected run-rate of RM 51,000.00 – RM 60,000.00.`,
+      message: `Electricity expense recorded at RM ${electricity.toFixed(2)} vs expected run-rate of RM ${(51000 * mult).toFixed(2)} – RM ${(60000 * mult).toFixed(2)}.`,
       recommendation: 'Confirm TNB meter invoice status or accrue unbilled power consumption.'
     });
-  } else if (electricity > 62000) {
+  } else if (electricity > elecMaxBase) {
     alerts.push({
       id: 'UTILITY-ELEC-SPIKE',
       type: 'WARNING',
       category: 'Overhead Variance',
       title: 'Electricity Tariff / Usage Surge (904-U001)',
-      message: `Electricity recorded at RM ${electricity.toFixed(2)}, exceeding maximum baseline threshold of RM 60,000.00.`,
+      message: `Electricity recorded at RM ${electricity.toFixed(2)}, exceeding maximum baseline threshold of RM ${(60000 * mult).toFixed(2)}.`,
       recommendation: 'Audit HVAC FCU chiller setpoints and peak demand surcharge timing.'
     });
   }
 
   // 4. Water Utility Accrual Check (Baseline: RM 9,500 - RM 13,000)
-  if (water < 5000) {
+  const waterMinBase = 5000 * mult;
+  const waterMaxBase = 14000 * mult;
+  if (water < waterMinBase) {
     alerts.push({
       id: 'UTILITY-WATER-MISSING',
       type: 'CRITICAL',
       category: 'Overhead Accrual',
       title: 'Missing Accrual: Water Utility (904-U002)',
-      message: `Water utility expense recorded at RM ${water.toFixed(2)} vs baseline run-rate of RM 9,500.00 – RM 13,000.00.`,
+      message: `Water utility expense recorded at RM ${water.toFixed(2)} vs baseline run-rate of RM ${(9500 * mult).toFixed(2)} – RM ${(1300 * mult).toFixed(2)}.`,
       recommendation: 'Verify Syabas water meter reading and pending billing statements.'
     });
-  } else if (water > 14000) {
+  } else if (water > waterMaxBase) {
     alerts.push({
       id: 'UTILITY-WATER-SPIKE',
       type: 'WARNING',
       category: 'Overhead Variance',
       title: 'Water Consumption Surge (904-U002)',
-      message: `Water bill reached RM ${water.toFixed(2)} (baseline max: RM 13,000.00).`,
+      message: `Water bill reached RM ${water.toFixed(2)} (baseline max: RM ${(13000 * mult).toFixed(2)}).`,
       recommendation: 'Inspect guest room piping, cooling towers, and laundry water recycling valves.'
     });
   }
@@ -135,49 +143,53 @@ export function runFinancialAudit(monthData, prevMonthData = null) {
   const gajah3Rent = monthData.gajah3Rent || 0;
 
   // Security Guard Contract Check (Baseline: RM 13,000 - RM 18,500)
-  if (security < 8000) {
+  const secMinBase = 8000 * mult;
+  if (security < secMinBase) {
     alerts.push({
       id: 'VENDOR-SECURITY-MISSING',
       type: 'CRITICAL',
       category: 'Overhead Accrual',
       title: 'Missing Accrual: Security Guard Services',
-      message: `Security guard expense recorded at RM ${security.toFixed(2)} vs baseline run-rate of RM 13,000.00 – RM 18,500.00.`,
+      message: `Security guard expense recorded at RM ${security.toFixed(2)} vs baseline run-rate of RM ${(13000 * mult).toFixed(2)} – RM ${(18500 * mult).toFixed(2)}.`,
       recommendation: 'Verify vendor monthly guard billing status prior to month-end close.'
     });
   }
 
   // IT Support Fixed Contract Check (Baseline: RM 5,400.00)
-  if (Math.abs(itSupport - FIXED_BASELINES.IT_SUPPORT_SC_SYSTEMS) > 0.01) {
+  const itBase = FIXED_BASELINES.IT_SUPPORT_SC_SYSTEMS * mult;
+  if (Math.abs(itSupport - itBase) > 0.01) {
     alerts.push({
       id: 'VENDOR-IT-VARIANCE',
       type: 'INFO',
       category: 'Vendor Audit',
       title: 'SC Systems Contract Run-Rate Variance',
-      message: `IT Support charge recorded at RM ${itSupport.toFixed(2)} vs fixed H1 baseline of RM ${FIXED_BASELINES.IT_SUPPORT_SC_SYSTEMS.toFixed(2)}.`,
+      message: `IT Support charge recorded at RM ${itSupport.toFixed(2)} vs fixed baseline of RM ${itBase.toFixed(2)}.`,
       recommendation: 'Confirm whether volume-tiered renegotiations or employee assignment updates were activated.'
     });
   }
 
   // Parking System Fixed Contract Check (Baseline: RM 1,940.00)
-  if (Math.abs(parkingCost - FIXED_BASELINES.PARKING_BGD_ACCESS) > 0.01) {
+  const parkingBase = FIXED_BASELINES.PARKING_BGD_ACCESS * mult;
+  if (Math.abs(parkingCost - parkingBase) > 0.01) {
     alerts.push({
       id: 'VENDOR-PARKING-VARIANCE',
       type: 'INFO',
       category: 'Vendor Audit',
       title: 'BGD Access Parking System Variance',
-      message: `Parking cashless charge-out recorded at RM ${parkingCost.toFixed(2)} vs H1 baseline of RM ${FIXED_BASELINES.PARKING_BGD_ACCESS.toFixed(2)}.`,
+      message: `Parking cashless charge-out recorded at RM ${parkingCost.toFixed(2)} vs baseline of RM ${parkingBase.toFixed(2)}.`,
       recommendation: 'Verify transaction volume fees or equipment maintenance charges.'
     });
   }
 
   // Gajah3 Rental Income Fixed Check (Baseline: RM 2,500.00)
-  if (Math.abs(gajah3Rent - FIXED_BASELINES.GAJAH3_RENTAL) > 0.01) {
+  const rentBase = FIXED_BASELINES.GAJAH3_RENTAL * mult;
+  if (Math.abs(gajah3Rent - rentBase) > 0.01) {
     alerts.push({
       id: 'LEASE-RENTAL-VARIANCE',
       type: 'WARNING',
       category: 'Lease Audit',
       title: 'Gajah3 Cafe Rental Income Discrepancy',
-      message: `Rental income recorded at RM ${gajah3Rent.toFixed(2)} vs fixed lease agreement baseline of RM ${FIXED_BASELINES.GAJAH3_RENTAL.toFixed(2)}.`,
+      message: `Rental income recorded at RM ${gajah3Rent.toFixed(2)} vs fixed lease agreement baseline of RM ${rentBase.toFixed(2)}.`,
       recommendation: 'Audit tenant payment receipts and ledger posting codes.'
     });
   }
@@ -189,18 +201,19 @@ export function runFinancialAudit(monthData, prevMonthData = null) {
   const payrollEPF = monthData.payrollEPF || 0;
   const payrollSalary = monthData.payrollSalary || 0;
 
-  if (outsourcedLabour < 15000 && (monthData.occupancyPct || 0) > 40) {
+  const outsourcedMinBase = 15000 * mult;
+  if (outsourcedLabour < outsourcedMinBase && (monthData.occupancyPct || 0) > 40) {
     alerts.push({
       id: 'PAYROLL-OUTSOURCED-MISSING',
       type: 'CRITICAL',
       category: 'Overhead Accrual',
       title: 'Missing Accrual: Outsourced Manpower (901-2002)',
-      message: `Outsourced manpower expense recorded at RM ${outsourcedLabour.toFixed(2)} vs baseline run-rate of RM 31,000.00 – RM 38,000.00 at ${monthData.occupancyPct}% occupancy.`,
+      message: `Outsourced manpower expense recorded at RM ${outsourcedLabour.toFixed(2)} vs baseline run-rate of RM ${(31000 * mult).toFixed(2)} – RM ${(38000 * mult).toFixed(2)} at ${monthData.occupancyPct.toFixed(1)}% occupancy.`,
       recommendation: 'Verify staffing agency invoices for housekeeping and banquet stewards.'
     });
   }
 
-  // EPF Statutory Ratio Check (EPF should be roughly 70-80% of Basic Salary under Malaysian statutory rates)
+  // EPF Statutory Ratio Check
   if (payrollSalary > 0 && payrollEPF > 0) {
     const epfRatio = (payrollEPF / payrollSalary) * 100;
     if (epfRatio < 40 || epfRatio > 95) {

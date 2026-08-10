@@ -3,13 +3,16 @@ import { X, Printer, FileText, Users, UserCheck, Zap, Droplet, Flame, Shield, Se
 import { ResponsiveContainer, BarChart, Bar, LineChart, Line, ComposedChart, XAxis, YAxis, Tooltip, CartesianGrid, Cell, ReferenceLine, Legend } from 'recharts';
 import { FIXED_BASELINES } from '../constants/baselines';
 
-export default function ExecutiveMemoModal({ isOpen, onClose, allMonths = [], currentMonth, prevMonth, auditResult }) {
+export default function ExecutiveMemoModal({ isOpen, onClose, allMonths = [], allQuarters = [], currentMonth, prevMonth, auditResult }) {
   const printRef = useRef(null);
 
   if (!isOpen || !currentMonth) return null;
 
   const currentDate = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-  const { monthName, roomsAvailable, roomsSold, occupancyPct, adr, revpar, roomRevenueTotal, roomRevenueSC, roomRevenueNSC, sewerage, gas, electricity, water, security, itSupportSC, parkingBGD, gajah3Rent, banquetRevenue, netProfit, renovationCapex = [] } = currentMonth;
+  const isQuarter = currentMonth.isQuarter || false;
+  const periodLabel = currentMonth.quarterName || currentMonth.monthName || currentMonth.monthKey;
+
+  const { roomsAvailable, roomsSold, occupancyPct, adr, revpar, roomRevenueTotal, roomRevenueSC, roomRevenueNSC, sewerage, gas, electricity, water, security, itSupportSC, parkingBGD, gajah3Rent, banquetRevenue, netProfit, renovationCapex = [] } = currentMonth;
   const { alerts } = auditResult;
 
   const scPct = roomRevenueTotal > 0 ? ((roomRevenueSC / roomRevenueTotal) * 100).toFixed(1) : '0.0';
@@ -18,7 +21,7 @@ export default function ExecutiveMemoModal({ isOpen, onClose, allMonths = [], cu
   const roomMarginPct = roomRevenueTotal > 0 ? (((roomRevenueTotal - directRoomCost) / roomRevenueTotal) * 100).toFixed(1) : '0.0';
   const otaComm = currentMonth.otaCommissionBooking || 0;
 
-  // Payroll Metrics for Current Month
+  // Payroll Metrics for Current Period (Month or Quarter)
   const currSalary = currentMonth.payrollSalary || 219465.63;
   const currEpf = currentMonth.payrollEPF || 166515.38;
   const currSocso = currentMonth.payrollSocsoEis || 4934.05;
@@ -32,7 +35,7 @@ export default function ExecutiveMemoModal({ isOpen, onClose, allMonths = [], cu
   const currentAncillaryTotal = (banquetRevenue || 0) + (currentMonth.serambiFB || 0) + (currentMonth.breakfastPackage || 0) + (currentMonth.guestLaundry || 0) + (currentMonth.roomExtraCharges || 0);
   const currentPOR = roomsSold > 0 ? (currentAncillaryTotal / roomsSold).toFixed(2) : '0.00';
 
-  // 6 Overhead Line Items for Current Month
+  // 6 Overhead Line Items for Current Period
   const elecVal = electricity || 55534.46;
   const waterVal = water || 11681.73;
   const gasVal = gas || 2359.53;
@@ -41,10 +44,11 @@ export default function ExecutiveMemoModal({ isOpen, onClose, allMonths = [], cu
   const outsourcedVal = currOutsourced || 33822.10;
   const total6Overheads = elecVal + waterVal + gasVal + secVal + itSwVal + outsourcedVal;
 
-  // CHART DATASETS (Verbatim Match to Mission Control)
+  // CHART DATASETS (Dynamic Monthly or Quarterly)
+  const chartDataset = isQuarter ? (allQuarters.length > 0 ? allQuarters : [currentMonth]) : (allMonths || []);
   
-  // 1. Room Yield Chart Data (Exact Match to RoomYieldTab)
-  const roomChartData = (allMonths || []).map((m, idx, arr) => {
+  // 1. Room Yield Chart Data
+  const roomChartData = chartDataset.map((m, idx, arr) => {
     const sc = m.roomRevenueSC || 0;
     const nsc = m.roomRevenueNSC || 0;
     const total = m.roomRevenueTotal || (sc + nsc);
@@ -59,8 +63,10 @@ export default function ExecutiveMemoModal({ isOpen, onClose, allMonths = [], cu
       maSc = (arr[1].roomRevenueSC + arr[0].roomRevenueSC) / 2;
     }
 
+    const nameLabel = m.quarterName ? m.quarterKey : (m.monthName ? m.monthName.replace(' 2026', '') : m.monthKey);
+
     return {
-      name: m.monthName ? m.monthName.replace(' 2026', '') : m.monthKey,
+      name: nameLabel,
       sc: sc,
       nsc: nsc,
       totalRevenue: total,
@@ -81,7 +87,7 @@ export default function ExecutiveMemoModal({ isOpen, onClose, allMonths = [], cu
   ];
 
   // 3. Payroll Component & Intensity Chart Data
-  const payrollChartData = (allMonths || []).map(m => {
+  const payrollChartData = chartDataset.map(m => {
     const salary = m.payrollSalary || 242605.46;
     const epf = m.payrollEPF || 184891.25;
     const socsoEis = m.payrollSocsoEis || 4083.58;
@@ -91,9 +97,10 @@ export default function ExecutiveMemoModal({ isOpen, onClose, allMonths = [], cu
 
     const totalRev = (m.roomRevenueTotal || 0) + (m.banquetRevenue || 0) + (m.serambiFB || 0) + (m.breakfastPackage || 0) + (m.gajah3Rent || 2500);
     const payrollIntensity = totalRev > 0 ? parseFloat(((totalPayroll / totalRev) * 100).toFixed(1)) : 0;
+    const nameLabel = m.quarterName ? m.quarterKey : (m.monthName ? m.monthName.replace(' 2026', '') : m.monthKey);
 
     return {
-      name: m.monthName ? m.monthName.replace(' 2026', '') : m.monthKey,
+      name: nameLabel,
       salary,
       epf,
       socsoEis,
@@ -106,7 +113,7 @@ export default function ExecutiveMemoModal({ isOpen, onClose, allMonths = [], cu
   });
 
   // 4. Ancillary & POR Chart Data
-  const ancillaryChartData = (allMonths || []).map(m => {
+  const ancillaryChartData = chartDataset.map(m => {
     const banquet = m.banquetRevenue || 0;
     const serambi = m.serambiFB || 0;
     const breakfast = m.breakfastPackage || 0;
@@ -114,9 +121,10 @@ export default function ExecutiveMemoModal({ isOpen, onClose, allMonths = [], cu
     const extra = m.roomExtraCharges || 0;
     const totalAncillary = banquet + serambi + breakfast + laundry + extra;
     const por = m.roomsSold > 0 ? parseFloat((totalAncillary / m.roomsSold).toFixed(2)) : 0;
+    const nameLabel = m.quarterName ? m.quarterKey : (m.monthName ? m.monthName.replace(' 2026', '') : m.monthKey);
 
     return {
-      name: m.monthName ? m.monthName.replace(' 2026', '') : m.monthKey,
+      name: nameLabel,
       banquet,
       serambi,
       totalAncillary,
@@ -287,7 +295,7 @@ export default function ExecutiveMemoModal({ isOpen, onClose, allMonths = [], cu
             <div>
               <h2 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#ffffff' }}>Executive Management Report PDF</h2>
               <p style={{ fontSize: '0.78rem', color: '#94a3b8' }}>
-                Multi-Page Executive Report Mirroring Mission Control ({monthName})
+                Multi-Page Executive Report Mirroring Mission Control ({periodLabel})
               </p>
             </div>
           </div>
@@ -342,7 +350,7 @@ export default function ExecutiveMemoModal({ isOpen, onClose, allMonths = [], cu
                   Hotel Maluri
                 </h1>
                 <p style={{ fontSize: '0.88rem', color: '#475569', fontWeight: 600 }}>
-                  Executive Profit & Loss & Variance Audit Report ({monthName})
+                  Executive Profit & Loss & Variance Audit Report ({periodLabel})
                 </p>
               </div>
               <div style={{ textAlign: 'right', fontSize: '0.78rem', color: '#475569', fontWeight: 500 }}>
@@ -359,7 +367,7 @@ export default function ExecutiveMemoModal({ isOpen, onClose, allMonths = [], cu
               marginBottom: '20px'
             }}>
               <div style={{ fontSize: '0.72rem', fontWeight: 800, color: '#b45309', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '4px' }}>
-                EXECUTIVE SUMMARY · {monthName.toUpperCase()}
+                EXECUTIVE SUMMARY · {periodLabel.toUpperCase()}
               </div>
               <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0f172a', fontStyle: 'italic', marginBottom: '8px' }}>
                 Unit economics showing steady recovery — but constrained by a {currPayrollIntensity}% payroll intensity ratio vs 35-40% target.
@@ -402,7 +410,7 @@ export default function ExecutiveMemoModal({ isOpen, onClose, allMonths = [], cu
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
                 <div style={{ fontSize: '0.72rem', fontWeight: 800, color: '#1d4ed8', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-                  KUALA LUMPUR 4-STAR HOTEL BENCHMARK COMPARISON · YTD 2026
+                  KUALA LUMPUR 4-STAR HOTEL BENCHMARK COMPARISON · {periodLabel.toUpperCase()}
                 </div>
 
                 <span style={{ background: '#dbeafe', color: '#1e40af', fontSize: '0.68rem', fontWeight: 800, padding: '2px 8px', borderRadius: '4px', border: '1px solid #93c5fd' }}>
@@ -414,7 +422,7 @@ export default function ExecutiveMemoModal({ isOpen, onClose, allMonths = [], cu
                 <thead>
                   <tr style={{ background: '#e2e8f0', color: '#0f172a', textAlign: 'left', borderBottom: '1px solid #cbd5e1' }}>
                     <th style={{ padding: '6px 8px', fontWeight: 700 }}>Performance Metric</th>
-                    <th style={{ padding: '6px 8px', fontWeight: 700 }}>Hotel Maluri (YTD 2026)</th>
+                    <th style={{ padding: '6px 8px', fontWeight: 700 }}>Hotel Maluri ({periodLabel})</th>
                     <th style={{ padding: '6px 8px', fontWeight: 700 }}>KL 4-Star Benchmark</th>
                     <th style={{ padding: '6px 8px', fontWeight: 700 }}>Variance</th>
                     <th style={{ padding: '6px 8px', fontWeight: 700 }}>Operational Status</th>
@@ -423,31 +431,31 @@ export default function ExecutiveMemoModal({ isOpen, onClose, allMonths = [], cu
                 <tbody>
                   <tr style={{ borderBottom: '1px solid #e2e8f0' }}>
                     <td style={{ padding: '6px 8px', fontWeight: 600 }}>Occupancy Rate</td>
-                    <td style={{ padding: '6px 8px', fontWeight: 700 }}>53.62%</td>
+                    <td style={{ padding: '6px 8px', fontWeight: 700 }}>{occupancyPct.toFixed(2)}%</td>
                     <td style={{ padding: '6px 8px' }}>68.50% (65–72%)</td>
-                    <td style={{ padding: '6px 8px', color: '#b91c1c', fontWeight: 700 }}>-14.88 pts</td>
-                    <td style={{ padding: '6px 8px', color: '#b91c1c', fontWeight: 700 }}>21.7% Shortfall</td>
+                    <td style={{ padding: '6px 8px', color: occupancyPct < 65 ? '#b91c1c' : '#047857', fontWeight: 700 }}>{(occupancyPct - 68.5).toFixed(2)} pts</td>
+                    <td style={{ padding: '6px 8px', color: occupancyPct < 65 ? '#b91c1c' : '#047857', fontWeight: 700 }}>{occupancyPct < 65 ? `${(100 - (occupancyPct/68.5*100)).toFixed(1)}% Shortfall` : 'On Target'}</td>
                   </tr>
                   <tr style={{ borderBottom: '1px solid #e2e8f0', background: '#f1f5f9' }}>
                     <td style={{ padding: '6px 8px', fontWeight: 600 }}>Average Daily Rate (ADR)</td>
-                    <td style={{ padding: '6px 8px', fontWeight: 700 }}>RM 161.68</td>
+                    <td style={{ padding: '6px 8px', fontWeight: 700 }}>RM {adr.toFixed(2)}</td>
                     <td style={{ padding: '6px 8px' }}>RM 265.00 (RM 240–310)</td>
-                    <td style={{ padding: '6px 8px', color: '#b91c1c', fontWeight: 700 }}>-RM 103.32 (-39.0%)</td>
-                    <td style={{ padding: '6px 8px', color: '#b91c1c', fontWeight: 700 }}>Deep Rate Discount</td>
+                    <td style={{ padding: '6px 8px', color: adr < 240 ? '#b91c1c' : '#047857', fontWeight: 700 }}>-RM {(265.00 - adr).toFixed(2)} ({(((adr - 265.00) / 265.00) * 100).toFixed(1)}%)</td>
+                    <td style={{ padding: '6px 8px', color: adr < 240 ? '#b91c1c' : '#047857', fontWeight: 700 }}>{adr < 240 ? 'Rate Discount' : 'On Target'}</td>
                   </tr>
                   <tr style={{ borderBottom: '1px solid #e2e8f0' }}>
                     <td style={{ padding: '6px 8px', fontWeight: 600 }}>RevPAR Yield</td>
-                    <td style={{ padding: '6px 8px', fontWeight: 700 }}>RM 86.69</td>
+                    <td style={{ padding: '6px 8px', fontWeight: 700 }}>RM {revpar.toFixed(2)}</td>
                     <td style={{ padding: '6px 8px' }}>RM 181.53 (RM 160–220)</td>
-                    <td style={{ padding: '6px 8px', color: '#b91c1c', fontWeight: 700 }}>-RM 94.84 (-52.2%)</td>
-                    <td style={{ padding: '6px 8px', color: '#b91c1c', fontWeight: 700 }}>Yield Deficit</td>
+                    <td style={{ padding: '6px 8px', color: revpar < 160 ? '#b91c1c' : '#047857', fontWeight: 700 }}>-RM {(181.53 - revpar).toFixed(2)} ({(((revpar - 181.53) / 181.53) * 100).toFixed(1)}%)</td>
+                    <td style={{ padding: '6px 8px', color: revpar < 160 ? '#b91c1c' : '#047857', fontWeight: 700 }}>{revpar < 160 ? 'Yield Deficit' : 'On Target'}</td>
                   </tr>
                   <tr style={{ borderBottom: '1px solid #e2e8f0', background: '#f1f5f9' }}>
                     <td style={{ padding: '6px 8px', fontWeight: 600 }}>Payroll-to-Revenue Ratio</td>
-                    <td style={{ padding: '6px 8px', fontWeight: 700, color: '#b91c1c' }}>50.55%</td>
+                    <td style={{ padding: '6px 8px', fontWeight: 700, color: parseFloat(currPayrollIntensity) > 38 ? '#b91c1c' : '#047857' }}>{currPayrollIntensity}%</td>
                     <td style={{ padding: '6px 8px' }}>35.00% (Ceiling: 38%)</td>
-                    <td style={{ padding: '6px 8px', color: '#b91c1c', fontWeight: 700 }}>+15.55 pts (+37.5%)</td>
-                    <td style={{ padding: '6px 8px', color: '#b91c1c', fontWeight: 700 }}>Critical Overrun</td>
+                    <td style={{ padding: '6px 8px', color: parseFloat(currPayrollIntensity) > 38 ? '#b91c1c' : '#047857', fontWeight: 700 }}>+{(parseFloat(currPayrollIntensity) - 35.0).toFixed(1)} pts</td>
+                    <td style={{ padding: '6px 8px', color: parseFloat(currPayrollIntensity) > 38 ? '#b91c1c' : '#047857', fontWeight: 700 }}>{parseFloat(currPayrollIntensity) > 38 ? 'Overrun Risk' : 'Within Ceiling'}</td>
                   </tr>
                   <tr style={{ borderBottom: '1px solid #e2e8f0' }}>
                     <td style={{ padding: '6px 8px', fontWeight: 600 }}>Staffing Density</td>
@@ -458,12 +466,11 @@ export default function ExecutiveMemoModal({ isOpen, onClose, allMonths = [], cu
                   </tr>
                   <tr style={{ background: '#f1f5f9' }}>
                     <td style={{ padding: '6px 8px', fontWeight: 600 }}>Net Margin / GOP</td>
-                    <td style={{ padding: '6px 8px', fontWeight: 700, color: '#b91c1c' }}>-30.46% Net Margin</td>
+                    <td style={{ padding: '6px 8px', fontWeight: 700, color: netProfit < 0 ? '#b91c1c' : '#047857' }}>{((netProfit / currTotalRev) * 100).toFixed(1)}% Net Margin</td>
                     <td style={{ padding: '6px 8px' }}>+32.50% GOP Target</td>
                     <td style={{ padding: '6px 8px', color: '#b91c1c', fontWeight: 700 }}>-62.96 pts</td>
                     <td style={{ padding: '6px 8px', color: '#b91c1c', fontWeight: 700 }}>Operating Loss (-RM 877k)</td>
                   </tr>
-
                 </tbody>
               </table>
 
@@ -738,7 +745,7 @@ export default function ExecutiveMemoModal({ isOpen, onClose, allMonths = [], cu
               </h4>
               {renovationCapex.length === 0 ? (
                 <div style={{ fontSize: '0.78rem', color: '#64748b', textAlign: 'center', padding: '12px' }}>
-                  No renovation Capex line items logged in General Ledger for {monthName}.
+                  No renovation Capex line items logged in General Ledger for {periodLabel}.
                 </div>
               ) : (
                 <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.78rem' }}>
@@ -1071,36 +1078,36 @@ export default function ExecutiveMemoModal({ isOpen, onClose, allMonths = [], cu
               {/* P&L & Payroll Breakdown Table */}
               <div className="paper-card" style={{ padding: '16px', borderRadius: '10px', background: '#ffffff', border: '1px solid #cbd5e1' }}>
                 <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: '#0f172a', marginBottom: '8px' }}>
-                  PAYROLL & STAFF COST BREAKDOWN – {monthName.toUpperCase()} (RM)
+                  PAYROLL & STAFF COST BREAKDOWN – {periodLabel.toUpperCase()} (RM)
                 </h4>
                 <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.78rem' }}>
                   <thead>
                     <tr style={{ borderBottom: '1.5px solid #cbd5e1', color: '#475569', fontWeight: 700 }}>
                       <th style={{ textAlign: 'left', padding: '6px' }}>Payroll Category</th>
-                      <th style={{ textAlign: 'right', padding: '6px' }}>{monthName}</th>
-                      <th style={{ textAlign: 'right', padding: '6px' }}>H1 Monthly Avg</th>
+                      <th style={{ textAlign: 'right', padding: '6px' }}>{periodLabel}</th>
+                      <th style={{ textAlign: 'right', padding: '6px' }}>{isQuarter ? 'Quarterly Target' : 'H1 Monthly Avg'}</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr style={{ borderBottom: '1px solid #e2e8f0' }}>
                       <td style={{ padding: '6px', color: '#1d4ed8', fontWeight: 600 }}>Basic Salaries (901-1001)</td>
                       <td style={{ padding: '6px', textAlign: 'right' }}>RM {currSalary.toLocaleString('en-US', { minimumFractionDigits: 2 })}</td>
-                      <td style={{ padding: '6px', textAlign: 'right' }}>RM 242,605.46</td>
+                      <td style={{ padding: '6px', textAlign: 'right' }}>RM {(242605.46 * (isQuarter ? (currentMonth.monthsCount || 3) : 1)).toLocaleString('en-US', { minimumFractionDigits: 2 })}</td>
                     </tr>
                     <tr style={{ borderBottom: '1px solid #e2e8f0' }}>
                       <td style={{ padding: '6px', color: '#6d28d9', fontWeight: 600 }}>EPF Statutory (Derived)</td>
                       <td style={{ padding: '6px', textAlign: 'right' }}>RM {currEpf.toLocaleString('en-US', { minimumFractionDigits: 2 })}</td>
-                      <td style={{ padding: '6px', textAlign: 'right' }}>RM 184,891.25</td>
+                      <td style={{ padding: '6px', textAlign: 'right' }}>RM {(184891.25 * (isQuarter ? (currentMonth.monthsCount || 3) : 1)).toLocaleString('en-US', { minimumFractionDigits: 2 })}</td>
                     </tr>
                     <tr style={{ borderBottom: '1px solid #e2e8f0' }}>
                       <td style={{ padding: '6px', color: '#b45309', fontWeight: 600 }}>Outsourced Labour (901-2002)</td>
                       <td style={{ padding: '6px', textAlign: 'right' }}>RM {currOutsourced.toLocaleString('en-US', { minimumFractionDigits: 2 })}</td>
-                      <td style={{ padding: '6px', textAlign: 'right' }}>RM 33,822.10</td>
+                      <td style={{ padding: '6px', textAlign: 'right' }}>RM {(33822.10 * (isQuarter ? (currentMonth.monthsCount || 3) : 1)).toLocaleString('en-US', { minimumFractionDigits: 2 })}</td>
                     </tr>
                     <tr style={{ fontWeight: 800, background: '#f8fafc' }}>
                       <td style={{ padding: '6px', color: '#0f172a' }}>TOTAL PAYROLL COST</td>
                       <td style={{ padding: '6px', textAlign: 'right', color: '#b45309' }}>RM {currTotalPayroll.toLocaleString('en-US', { minimumFractionDigits: 2 })}</td>
-                      <td style={{ padding: '6px', textAlign: 'right', color: '#b45309' }}>RM 490,709.92</td>
+                      <td style={{ padding: '6px', textAlign: 'right', color: '#b45309' }}>RM {(490709.92 * (isQuarter ? (currentMonth.monthsCount || 3) : 1)).toLocaleString('en-US', { minimumFractionDigits: 2 })}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -1109,14 +1116,14 @@ export default function ExecutiveMemoModal({ isOpen, onClose, allMonths = [], cu
               {/* Utility & Key Cost Watch Table */}
               <div className="paper-card" style={{ padding: '16px', borderRadius: '10px', background: '#ffffff', border: '1px solid #cbd5e1' }}>
                 <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: '#0f172a', marginBottom: '8px' }}>
-                  UTILITIES & KEY COST WATCH – {monthName.toUpperCase()} (RM)
+                  UTILITIES & KEY COST WATCH – {periodLabel.toUpperCase()} (RM)
                 </h4>
                 <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.78rem' }}>
                   <thead>
                     <tr style={{ borderBottom: '1.5px solid #cbd5e1', color: '#475569', fontWeight: 700 }}>
                       <th style={{ textAlign: 'left', padding: '6px' }}>Cost Item</th>
-                      <th style={{ textAlign: 'right', padding: '6px' }}>{monthName}</th>
-                      <th style={{ textAlign: 'right', padding: '6px' }}>H1 Monthly Avg</th>
+                      <th style={{ textAlign: 'right', padding: '6px' }}>{periodLabel}</th>
+                      <th style={{ textAlign: 'right', padding: '6px' }}>{isQuarter ? 'Quarterly Baseline' : 'H1 Monthly Avg'}</th>
                     </tr>
                   </thead>
                   <tbody>

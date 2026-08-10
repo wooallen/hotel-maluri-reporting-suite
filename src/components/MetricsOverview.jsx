@@ -4,7 +4,10 @@ import { DollarSign, BedDouble, TrendingUp, TrendingDown, Percent, AlertCircle }
 export default function MetricsOverview({ currentMonth, prevMonth, auditResult }) {
   if (!currentMonth) return null;
 
-  const { occupancyPct, adr, revpar, roomRevenueTotal, netProfit } = currentMonth;
+  const isQuarter = currentMonth.isQuarter || false;
+  const suffix = isQuarter ? 'QoQ' : 'MoM';
+
+  const { occupancyPct, adr, revpar, roomRevenueTotal } = currentMonth;
   const prevAdr = prevMonth ? prevMonth.adr : null;
   const prevRevpar = prevMonth ? prevMonth.revpar : null;
   const prevOcc = prevMonth ? prevMonth.occupancyPct : null;
@@ -17,7 +20,7 @@ export default function MetricsOverview({ currentMonth, prevMonth, auditResult }
     {
       title: 'TOTAL ROOM REVENUE',
       value: `RM ${roomRevenueTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
-      subtitle: 'SC + NSC Combined',
+      subtitle: isQuarter ? `SC + NSC Combined (${currentMonth.quarterName || 'Quarter'})` : 'SC + NSC Combined',
       icon: DollarSign,
       iconColor: '#f59e0b',
       badge: currentMonth.isH1Baseline ? 'Baseline Data' : 'H2 Ingested'
@@ -28,7 +31,7 @@ export default function MetricsOverview({ currentMonth, prevMonth, auditResult }
       subtitle: `${currentMonth.roomsSold.toLocaleString()} / ${currentMonth.roomsAvailable.toLocaleString()} Rooms`,
       icon: Percent,
       iconColor: '#3b82f6',
-      trend: occDiffPct !== null ? `${occDiffPct >= 0 ? '+' : ''}${occDiffPct.toFixed(1)}% MoM` : null,
+      trend: occDiffPct !== null ? `${occDiffPct >= 0 ? '+' : ''}${occDiffPct.toFixed(1)}% ${suffix}` : null,
       trendUp: occDiffPct >= 0
     },
     {
@@ -37,7 +40,7 @@ export default function MetricsOverview({ currentMonth, prevMonth, auditResult }
       subtitle: 'Room Revenue / Rooms Sold',
       icon: BedDouble,
       iconColor: '#10b981',
-      trend: adrDiffPct !== null ? `${adrDiffPct >= 0 ? '+' : ''}${adrDiffPct.toFixed(2)}% MoM` : null,
+      trend: adrDiffPct !== null ? `${adrDiffPct >= 0 ? '+' : ''}${adrDiffPct.toFixed(2)}% ${suffix}` : null,
       trendUp: adrDiffPct >= 0,
       warning: auditResult.yieldAnomaly
     },
@@ -47,7 +50,7 @@ export default function MetricsOverview({ currentMonth, prevMonth, auditResult }
       subtitle: 'Room Revenue / Available',
       icon: TrendingUp,
       iconColor: '#8b5cf6',
-      trend: revparDiffPct !== null ? `${revparDiffPct >= 0 ? '+' : ''}${revparDiffPct.toFixed(2)}% MoM` : null,
+      trend: revparDiffPct !== null ? `${revparDiffPct >= 0 ? '+' : ''}${revparDiffPct.toFixed(2)}% ${suffix}` : null,
       trendUp: revparDiffPct >= 0
     }
   ];

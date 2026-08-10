@@ -15,25 +15,52 @@ import BenchmarkOverview from './components/BenchmarkOverview';
 
 import { H1_2026_MONTHLY_DATA } from './constants/baselines';
 import { runFinancialAudit } from './services/auditEngine';
+import { getAllQuarters } from './services/quarterUtils';
 import { BedDouble, ShieldAlert, Server, Store, Users, Cpu, Sparkles } from 'lucide-react';
 
 export default function App() {
   const [allMonths, setAllMonths] = useState(H1_2026_MONTHLY_DATA);
-  const [selectedMonthKey, setSelectedMonthKey] = useState('2026-06');
+  const [selectedPeriodKey, setSelectedPeriodKey] = useState('2026-06');
   const [activeTab, setActiveTab] = useState('ROOM_YIELD');
   const [isUploadOpen, setIsUploadOpen] = useState(false);
   const [isMemoOpen, setIsMemoOpen] = useState(false);
   const [agentAnalysis, setAgentAnalysis] = useState(null);
 
-  // Selected Month Data
-  const selectedIndex = allMonths.findIndex(m => m.monthKey === selectedMonthKey);
-  const currentMonth = selectedIndex !== -1 ? allMonths[selectedIndex] : allMonths[allMonths.length - 1];
-  const prevMonth = selectedIndex > 0 ? allMonths[selectedIndex - 1] : null;
+  // Compute Quarterly Datasets dynamically
+  const allQuarters = useMemo(() => {
+    return getAllQuarters(allMonths);
+  }, [allMonths]);
 
-  // Run Audit Engine
+  // Selected Period Data (Month or Quarter)
+  const isQuarterSelected = selectedPeriodKey.startsWith('Q');
+  
+  const currentPeriod = useMemo(() => {
+    if (isQuarterSelected) {
+      const q = allQuarters.find(q => q.quarterKey === selectedPeriodKey);
+      return q || allQuarters[allQuarters.length - 1];
+    }
+    const m = allMonths.find(m => m.monthKey === selectedPeriodKey);
+    return m || allMonths[allMonths.length - 1];
+  }, [selectedPeriodKey, allMonths, allQuarters, isQuarterSelected]);
+
+  const prevPeriod = useMemo(() => {
+    if (!currentPeriod) return null;
+    if (currentPeriod.isQuarter) {
+      const idx = allQuarters.findIndex(q => q.quarterKey === currentPeriod.quarterKey);
+      return idx > 0 ? allQuarters[idx - 1] : null;
+    }
+    const idx = allMonths.findIndex(m => m.monthKey === currentPeriod.monthKey);
+    return idx > 0 ? allMonths[idx - 1] : null;
+  }, [currentPeriod, allMonths, allQuarters]);
+
+  // Backward compatibility alias for single month references
+  const currentMonth = currentPeriod;
+  const prevMonth = prevPeriod;
+
+  // Run Audit Engine on Selected Period
   const auditResult = useMemo(() => {
-    return currentMonth ? runFinancialAudit(currentMonth, prevMonth) : { alerts: [] };
-  }, [currentMonth, prevMonth]);
+    return currentPeriod ? runFinancialAudit(currentPeriod, prevPeriod) : { alerts: [] };
+  }, [currentPeriod, prevPeriod]);
 
   // Handle Uploaded Spreadsheet Data
   const handleDataUploaded = (ingestedResult) => {
@@ -57,7 +84,7 @@ export default function App() {
       });
 
       if (newMonths.length > 0) {
-        setSelectedMonthKey(newMonths[newMonths.length - 1].monthKey);
+        setSelectedPeriodKey(newMonths[newMonths.length - 1].monthKey);
       }
     }
   };
@@ -69,9 +96,11 @@ export default function App() {
       <div className="no-print">
         {/* Header */}
         <Header 
-          selectedMonth={currentMonth}
+          selectedPeriodKey={selectedPeriodKey}
+          selectedPeriod={currentPeriod}
           availableMonths={allMonths}
-          onSelectMonth={(key) => setSelectedMonthKey(key)}
+          availableQuarters={allQuarters}
+          onSelectPeriod={(key) => setSelectedPeriodKey(key)}
           onOpenUpload={() => setIsUploadOpen(true)}
           onOpenMemo={() => setIsMemoOpen(true)}
         />
@@ -92,7 +121,7 @@ export default function App() {
                 </div>
                 <div>
                   <h4 style={{ fontSize: '0.95rem', fontWeight: 700, color: '#93c5fd', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <span>AI Financial Analyst Agent Deployed & Deployed</span>
+                    <span>AI Financial Analyst Agent Deployed</span>
                     <Sparkles size={14} color="#f59e0b" />
                   </h4>
                   <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
@@ -128,10 +157,10 @@ export default function App() {
         <AuditAlertsBanner alerts={auditResult.alerts} />
 
         {/* Kuala Lumpur 4-Star Hotel Benchmarking & Strategic Recommendations */}
-        <BenchmarkOverview />
+        <BenchmarkOverview currentPeriod={currentPeriod} />
 
         {/* Top KPI Metrics Bar */}
-        <MetricsOverview monthData={currentMonth} auditResult={auditResult} />
+        <MetricsOverview monthData={currentPeriod} auditResult={auditResult} />
 
         {/* Navigation Tabs Container */}
         <div className="tab-bar-container">
@@ -180,7 +209,7 @@ export default function App() {
         <main>
           {activeTab === 'ROOM_YIELD' && (
             <RoomYieldTab 
-              allMonths={allMonths}
+              allMonths={currentPeriod?.isQuarter ? currentPeriod.months : allMonths}
               currentMonth={currentMonth}
               prevMonth={prevMonth}
               auditResult={auditResult}
@@ -189,7 +218,7 @@ export default function App() {
 
           {activeTab === 'UTILITIES' && (
             <UtilitiesTab 
-              allMonths={allMonths}
+              allMonths={currentPeriod?.isQuarter ? currentPeriod.months : allMonths}
               currentMonth={currentMonth}
               prevMonth={prevMonth}
               auditResult={auditResult}
@@ -198,7 +227,7 @@ export default function App() {
 
           {activeTab === 'PAYROLL' && (
             <PayrollTab 
-              allMonths={allMonths}
+              allMonths={currentPeriod?.isQuarter ? currentPeriod.months : allMonths}
               currentMonth={currentMonth}
               prevMonth={prevMonth}
               auditResult={auditResult}
@@ -214,7 +243,7 @@ export default function App() {
 
           {activeTab === 'ANCILLARY' && (
             <AncillaryTab 
-              allMonths={allMonths}
+              allMonths={currentPeriod?.isQuarter ? currentPeriod.months : allMonths}
               currentMonth={currentMonth}
               prevMonth={prevMonth}
               auditResult={auditResult}
@@ -235,6 +264,7 @@ export default function App() {
         isOpen={isMemoOpen}
         onClose={() => setIsMemoOpen(false)}
         allMonths={allMonths}
+        allQuarters={allQuarters}
         currentMonth={currentMonth}
         prevMonth={prevMonth}
         auditResult={auditResult}

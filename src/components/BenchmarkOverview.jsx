@@ -90,7 +90,90 @@ export const OPERATIONAL_RECOMMENDATIONS = [
   }
 ];
 
-export default function BenchmarkOverview() {
+export default function BenchmarkOverview({ currentPeriod }) {
+  const isQuarter = currentPeriod?.isQuarter || false;
+  const periodLabel = currentPeriod ? (currentPeriod.quarterName || currentPeriod.monthName) : 'YTD 2026';
+
+  let benchmarks = KL_4STAR_BENCHMARKS;
+  if (currentPeriod) {
+    const occ = currentPeriod.occupancyPct || 0;
+    const adrVal = currentPeriod.adr || 0;
+    const revparVal = currentPeriod.revpar || 0;
+    
+    const roomRev = currentPeriod.roomRevenueTotal || 0;
+    const banquetRev = currentPeriod.banquetRevenue || 0;
+    const serambiRev = currentPeriod.serambiFB || 0;
+    const bfRev = currentPeriod.breakfastPackage || 0;
+    const rentRev = currentPeriod.gajah3Rent || 0;
+    const totalRev = roomRev + banquetRev + serambiRev + bfRev + rentRev;
+    
+    const payrollVal = currentPeriod.totalPayroll || 0;
+    const payrollPct = totalRev > 0 ? (payrollVal / totalRev) * 100 : 0;
+    const fbRevTotal = banquetRev + serambiRev + bfRev;
+    const fbShare = totalRev > 0 ? (fbRevTotal / totalRev) * 100 : 0;
+    const netProf = currentPeriod.netProfit || 0;
+    const netMargin = totalRev > 0 ? (netProf / totalRev) * 100 : 0;
+
+    benchmarks = [
+      {
+        metric: 'Occupancy Rate',
+        hotelVal: `${occ.toFixed(2)}%`,
+        benchmarkVal: '68.50%',
+        variance: `${(occ - 68.5).toFixed(2)} pts`,
+        status: occ < 65 ? 'BELOW_TARGET' : 'ON_TARGET',
+        detail: `${currentPeriod.roomsSold?.toLocaleString()} rooms sold out of ${currentPeriod.roomsAvailable?.toLocaleString()} room nights available`
+      },
+      {
+        metric: 'Average Daily Rate (ADR)',
+        hotelVal: `RM ${adrVal.toFixed(2)}`,
+        benchmarkVal: 'RM 265.00',
+        variance: `-RM ${(265.00 - adrVal).toFixed(2)} (${(((adrVal - 265.00) / 265.00) * 100).toFixed(1)}%)`,
+        status: adrVal < 240 ? 'BELOW_TARGET' : 'ON_TARGET',
+        detail: `Rate positioning for ${periodLabel}`
+      },
+      {
+        metric: 'RevPAR Yield',
+        hotelVal: `RM ${revparVal.toFixed(2)}`,
+        benchmarkVal: 'RM 181.53',
+        variance: `-RM ${(181.53 - revparVal).toFixed(2)} (${(((revparVal - 181.53) / 181.53) * 100).toFixed(1)}%)`,
+        status: revparVal < 160 ? 'BELOW_TARGET' : 'ON_TARGET',
+        detail: `Compound yield for ${periodLabel}`
+      },
+      {
+        metric: 'Payroll-to-Revenue Ratio',
+        hotelVal: `${payrollPct.toFixed(1)}%`,
+        benchmarkVal: '35.00%',
+        variance: `+${(payrollPct - 35.0).toFixed(1)} pts (${((payrollPct - 35.0) / 35.0 * 100).toFixed(1)}% excess)`,
+        status: payrollPct > 40 ? 'CRITICAL' : payrollPct > 35 ? 'WARNING' : 'ON_TARGET',
+        detail: `RM ${payrollVal.toLocaleString('en-US', { maximumFractionDigits: 0 })} staff cost on RM ${totalRev.toLocaleString('en-US', { maximumFractionDigits: 0 })} revenue`
+      },
+      {
+        metric: 'Staffing Density',
+        hotelVal: '~0.60 staff/room',
+        benchmarkVal: '0.45 staff/room',
+        variance: '+0.15 staff/room',
+        status: 'WARNING',
+        detail: 'Target 67 FTEs for 148 rooms vs current labor allocation'
+      },
+      {
+        metric: 'Net Margin / GOP',
+        hotelVal: `${netMargin.toFixed(1)}%`,
+        benchmarkVal: '+32.50% GOP',
+        variance: `${(netMargin - 32.5).toFixed(1)} pts`,
+        status: netProf < 0 ? 'CRITICAL' : 'ON_TARGET',
+        detail: `RM ${netProf.toLocaleString('en-US', { maximumFractionDigits: 2 })} net profit/loss for ${periodLabel}`
+      },
+      {
+        metric: 'F&B & Banquet Share',
+        hotelVal: `${fbShare.toFixed(1)}%`,
+        benchmarkVal: '28.00%',
+        variance: `${(fbShare - 28.0).toFixed(1)} pts`,
+        status: fbShare < 20 ? 'WARNING' : 'ON_TARGET',
+        detail: `F&B + Banquet revenue share for ${periodLabel}`
+      }
+    ];
+  }
+
   return (
     <div className="glass-card" style={{
       padding: '22px 26px',
@@ -113,14 +196,14 @@ export default function BenchmarkOverview() {
             </h3>
 
             <p style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: '2px' }}>
-              Current Period Operational & Financial Comparison: Hotel Maluri vs. KL 4-Star Peer Group (YTD 2026)
+              {isQuarter ? 'Quarterly' : 'Monthly'} Operational & Financial Comparison: Hotel Maluri vs. KL 4-Star Peer Group ({periodLabel})
             </p>
           </div>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(59, 130, 246, 0.1)', padding: '6px 12px', borderRadius: '6px', border: '1px solid rgba(59, 130, 246, 0.2)' }}>
           <Sparkles size={14} color="#60a5fa" />
-          <span style={{ fontSize: '0.75rem', color: '#93c5fd', fontWeight: 600 }}>Active Benchmark Audit</span>
+          <span style={{ fontSize: '0.75rem', color: '#93c5fd', fontWeight: 600 }}>Active Benchmark Audit ({periodLabel})</span>
         </div>
       </div>
 
@@ -132,7 +215,7 @@ export default function BenchmarkOverview() {
         gap: '12px',
         marginBottom: '20px'
       }}>
-        {KL_4STAR_BENCHMARKS.map((item, idx) => {
+        {benchmarks.map((item, idx) => {
           const isCritical = item.status === 'CRITICAL';
           const isWarning = item.status === 'WARNING';
           const badgeBg = isCritical ? 'rgba(239, 68, 68, 0.15)' : isWarning ? 'rgba(245, 158, 11, 0.15)' : 'rgba(59, 130, 246, 0.15)';
@@ -198,7 +281,7 @@ export default function BenchmarkOverview() {
               </tr>
             </thead>
             <tbody>
-              {KL_4STAR_BENCHMARKS.map((b, i) => (
+              {benchmarks.map((b, i) => (
                 <tr key={i} style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.05)', background: i % 2 === 0 ? 'transparent' : 'rgba(255, 255, 255, 0.02)' }}>
                   <td style={{ padding: '8px 12px', fontWeight: 600, color: '#ffffff' }}>{b.metric}</td>
                   <td style={{ padding: '8px 12px', fontWeight: 800, color: '#60a5fa' }}>{b.hotelVal}</td>
