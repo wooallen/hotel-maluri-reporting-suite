@@ -392,7 +392,7 @@ export default function ExecutiveMemoModal({ isOpen, onClose, allMonths = [], cu
               </div>
             </div>
 
-            {/* KL 4-Star Hotel Industry Benchmarking & Strategic Recommendations (NotebookLM Ingested) */}
+            {/* KL 4-Star Hotel Industry Benchmarking & Strategic Recommendations */}
             <div className="paper-card" style={{
               background: '#f8fafc',
               border: '1.5px solid #3b82f6',
@@ -402,8 +402,9 @@ export default function ExecutiveMemoModal({ isOpen, onClose, allMonths = [], cu
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
                 <div style={{ fontSize: '0.72rem', fontWeight: 800, color: '#1d4ed8', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-                  KUALA LUMPUR 4-STAR HOTEL BENCHMARK COMPARISON · YTD 2026 (NOTEBOOKLM ANALYSIS)
+                  KUALA LUMPUR 4-STAR HOTEL BENCHMARK COMPARISON · YTD 2026
                 </div>
+
                 <span style={{ background: '#dbeafe', color: '#1e40af', fontSize: '0.68rem', fontWeight: 800, padding: '2px 8px', borderRadius: '4px', border: '1px solid #93c5fd' }}>
                   4-STAR PEER BENCHMARK
                 </span>

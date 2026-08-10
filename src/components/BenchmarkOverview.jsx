@@ -110,10 +110,8 @@ export default function BenchmarkOverview() {
           <div>
             <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#ffffff', display: 'flex', alignItems: 'center', gap: '8px' }}>
               <span>Kuala Lumpur 4-Star Hotel Industry Benchmarking</span>
-              <span style={{ fontSize: '0.68rem', background: '#f59e0b', color: '#000', padding: '2px 8px', borderRadius: '4px', fontWeight: 800 }}>
-                NotebookLM Ingested
-              </span>
             </h3>
+
             <p style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: '2px' }}>
               Current Period Operational & Financial Comparison: Hotel Maluri vs. KL 4-Star Peer Group (YTD 2026)
             </p>
