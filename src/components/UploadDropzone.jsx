@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { UploadCloud, FileCheck, AlertTriangle, X, CheckCircle2 } from 'lucide-react';
+import { UploadCloud, FileCheck, AlertTriangle, X, CheckCircle2, Cpu } from 'lucide-react';
 import { parseHotelMaluriExcel } from '../services/excelIngestion';
+import { runAIFinancialAgentAnalysis } from '../services/aiAgentService';
 
 export default function UploadDropzone({ isOpen, onClose, onDataUploaded }) {
   const [isDragging, setIsDragging] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [agentStep, setAgentStep] = useState('');
   const [errorMsg, setErrorMsg] = useState(null);
   const [successMsg, setSuccessMsg] = useState(null);
 
@@ -19,20 +21,40 @@ export default function UploadDropzone({ isOpen, onClose, onDataUploaded }) {
     setIsProcessing(true);
     setErrorMsg(null);
     setSuccessMsg(null);
+    setAgentStep('Deploying AI Financial Agent...');
 
     try {
       const result = await parseHotelMaluriExcel(file);
+      
+      // Execute AI Agent Analysis
+      let monthData = null;
+      let prevMonthData = null;
+      if (result.type === 'MANAGEMENT_REPORT' && result.months && result.months.length > 0) {
+        monthData = result.months[result.months.length - 1];
+        prevMonthData = result.months.length > 1 ? result.months[result.months.length - 2] : null;
+      }
+
+      const agentAnalysis = await runAIFinancialAgentAnalysis(
+        { monthData, prevMonthData },
+        null,
+        (progressText) => setAgentStep(progressText)
+      );
+
+      result.agentAnalysis = agentAnalysis;
+
       setIsProcessing(false);
-      setSuccessMsg(`Successfully parsed "${file.name}"!`);
+      setSuccessMsg(`AI Agent successfully analyzed "${file.name}"!`);
       setTimeout(() => {
         onDataUploaded(result);
         onClose();
         setSuccessMsg(null);
-      }, 1000);
+        setAgentStep('');
+      }, 1200);
     } catch (err) {
       console.error(err);
       setIsProcessing(false);
       setErrorMsg(`Failed to parse file: ${err.message}`);
+      setAgentStep('');
     }
   };
 
@@ -113,20 +135,20 @@ export default function UploadDropzone({ isOpen, onClose, onDataUploaded }) {
           
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '14px' }}>
             <div style={{
-              background: 'rgba(245, 158, 11, 0.1)',
+              background: isProcessing ? 'rgba(59, 130, 246, 0.15)' : 'rgba(245, 158, 11, 0.1)',
               padding: '16px',
               borderRadius: '50%',
-              border: '1px solid rgba(245, 158, 11, 0.2)'
+              border: isProcessing ? '1px solid rgba(59, 130, 246, 0.3)' : '1px solid rgba(245, 158, 11, 0.2)'
             }}>
-              <UploadCloud size={32} color="#f59e0b" />
+              {isProcessing ? <Cpu size={32} color="#60a5fa" className="spin-slow" /> : <UploadCloud size={32} color="#f59e0b" />}
             </div>
           </div>
 
           <h3 style={{ fontSize: '0.95rem', fontWeight: 600, marginBottom: '4px' }}>
-            {isProcessing ? 'Processing & Executing Financial Audits...' : 'Click to Browse or Drag & Drop File'}
+            {isProcessing ? (agentStep || 'AI Agent Deployed & Analyzing...') : 'Click to Browse or Drag & Drop File'}
           </h3>
           <p style={{ fontSize: '0.78rem', color: 'var(--text-dim)' }}>
-            Supports Hotel Maluri Management Reports and General Ledger (.xlsx)
+            {isProcessing ? 'Executing departmental P&L audits & hospitality benchmark matching...' : 'Supports Hotel Maluri Management Reports and General Ledger (.xlsx)'}
           </p>
         </div>
 
