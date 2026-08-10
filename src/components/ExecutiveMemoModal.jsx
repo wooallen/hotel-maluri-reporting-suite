@@ -527,6 +527,37 @@ export default function ExecutiveMemoModal({ isOpen, onClose, allMonths = [], al
               </p>
             </div>
 
+            {/* Accounting & Data Derivation Footnote Box */}
+            <div className="paper-card" style={{
+              background: '#f8fafc',
+              border: '1.5px dashed #cbd5e1',
+              borderRadius: '10px',
+              padding: '14px 16px',
+              marginTop: '16px'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px' }}>
+                <span style={{ background: '#0284c7', color: '#fff', fontSize: '0.65rem', fontWeight: 800, padding: '2px 6px', borderRadius: '4px', textTransform: 'uppercase' }}>
+                  METHODOLOGY FOOTNOTE
+                </span>
+                <strong style={{ fontSize: '0.8rem', color: '#0f172a' }}>
+                  Derivation of Revenue & Staff Costs Metrics
+                </strong>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '12px', fontSize: '0.74rem', color: '#334155', lineHeight: '1.5' }}>
+                <div>
+                  <strong style={{ color: '#0369a1', display: 'block', marginBottom: '2px' }}>1. Revenue Derivation:</strong>
+                  • <strong>Total Combined Revenue:</strong> Room Rev (GL 500-1000: SC 500-1001 + NSC 500-1002) + F&B (Serambi 500-SR01 + Breakfast 500-BF01 + Banquet 500-3000) + Tenancy Lease (540-1000 Gajah3 @ RM 2.5k) + Ancillary (Laundry 500-1004 + Extra Charges 500-1003).<br/>
+                  • <strong>ADR:</strong> Room Revenue / Rooms Sold.<br/>
+                  • <strong>RevPAR:</strong> Room Revenue / Total Available Rooms.
+                </div>
+                <div>
+                  <strong style={{ color: '#7c3aed', display: 'block', marginBottom: '2px' }}>2. Staff Costs (Payroll) Derivation:</strong>
+                  • <strong>Total Monthly Payroll:</strong> Basic Salaries (GL 901-1001) + EPF Employer Contribution (GL 901-1002) + SOCSO/EIS (GL 901-1003/4) + Outsourced Contract Labour (GL 901-2002) + Staff Welfare (GL 901-WELF).<br/>
+                  • <strong>Payroll Intensity (%):</strong> (Total Monthly Payroll / Total Combined Revenue) × 100 [Target: 35.0% - 40.0%].
+                </div>
+              </div>
+            </div>
+
           </div>
 
 
@@ -1154,7 +1185,7 @@ export default function ExecutiveMemoModal({ isOpen, onClose, allMonths = [], al
             </div>
 
             {/* Strategic Action Items */}
-            <div className="paper-card" style={{ padding: '18px', borderRadius: '10px', background: '#f8fafc', border: '1px solid #cbd5e1' }}>
+            <div className="paper-card" style={{ padding: '18px', borderRadius: '10px', background: '#f8fafc', border: '1px solid #cbd5e1', marginBottom: '16px' }}>
               <h4 style={{ fontSize: '0.9rem', fontWeight: 800, color: '#b45309', marginBottom: '10px', textTransform: 'uppercase' }}>
                 Strategic Action Recommendations for Executive Management
               </h4>
@@ -1169,6 +1200,51 @@ export default function ExecutiveMemoModal({ isOpen, onClose, allMonths = [], al
                   <strong>Strict Utility Accrual Auditing:</strong> Ensure all unbilled vendor liabilities (Sewerage & Gas) are recorded prior to ledger closing to eliminate artificially inflated monthly net profit figures.
                 </li>
               </ol>
+            </div>
+
+            {/* Accounting & Data Derivation Footnote Paper Card */}
+            <div className="paper-card" style={{
+              background: '#ffffff',
+              border: '1.5px solid #cbd5e1',
+              borderRadius: '10px',
+              padding: '16px',
+              borderLeft: '5px solid #d97706'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span style={{ background: '#f59e0b', color: '#000', fontSize: '0.68rem', fontWeight: 800, padding: '2px 8px', borderRadius: '4px', textTransform: 'uppercase' }}>
+                    FINANCIAL AUDIT FOOTNOTE
+                  </span>
+                  <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: '#0f172a', margin: 0 }}>
+                    Official Derivation Methodology for Revenue & Staff Costs
+                  </h4>
+                </div>
+                <span style={{ fontSize: '0.7rem', color: '#64748b', fontFamily: 'var(--font-mono)' }}>GL COA v2.10</span>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '14px', fontSize: '0.76rem', color: '#334155', lineHeight: '1.6' }}>
+                <div style={{ background: '#f8fafc', padding: '10px 12px', borderRadius: '6px', border: '1px solid #e2e8f0' }}>
+                  <h5 style={{ fontSize: '0.78rem', fontWeight: 700, color: '#1d4ed8', marginBottom: '4px' }}>
+                    📈 Revenue Numbers Derivation Formula
+                  </h5>
+                  <p style={{ margin: 0 }}>
+                    • <strong>Total Operating Revenue (RM):</strong> Room Revenue Total (<code style={{ background: '#e2e8f0', padding: '1px 4px', borderRadius: '3px' }}>500-1000</code>: Service Chargeable <code style={{ background: '#e2e8f0', padding: '1px 4px', borderRadius: '3px' }}>500-1001</code> + Non-Service Chargeable <code style={{ background: '#e2e8f0', padding: '1px 4px', borderRadius: '3px' }}>500-1002</code>) + Food & Beverage Revenue (<code style={{ background: '#e2e8f0', padding: '1px 4px', borderRadius: '3px' }}>500-SR01</code> Serambi F&B + <code style={{ background: '#e2e8f0', padding: '1px 4px', borderRadius: '3px' }}>500-BF01</code> Breakfast + <code style={{ background: '#e2e8f0', padding: '1px 4px', borderRadius: '3px' }}>500-3000</code> Banquet) + F&B Tenancy Rental (<code style={{ background: '#e2e8f0', padding: '1px 4px', borderRadius: '3px' }}>540-1000</code> Gajah3 Lease @ RM 2,500.00 flat) + Ancillary Revenue (<code style={{ background: '#e2e8f0', padding: '1px 4px', borderRadius: '3px' }}>500-1004</code> Laundry + <code style={{ background: '#e2e8f0', padding: '1px 4px', borderRadius: '3px' }}>500-1003</code> Extra Charges).<br/>
+                    • <strong>Average Daily Rate (ADR):</strong> <code style={{ background: '#e2e8f0', padding: '1px 4px', borderRadius: '3px' }}>Total Room Revenue (500-1000) / Total Rooms Sold</code><br/>
+                    • <strong>RevPAR:</strong> <code style={{ background: '#e2e8f0', padding: '1px 4px', borderRadius: '3px' }}>Total Room Revenue (500-1000) / Available Rooms</code> (or <code style={{ background: '#e2e8f0', padding: '1px 4px', borderRadius: '3px' }}>Occupancy % × ADR</code>)
+                  </p>
+                </div>
+
+                <div style={{ background: '#f8fafc', padding: '10px 12px', borderRadius: '6px', border: '1px solid #e2e8f0' }}>
+                  <h5 style={{ fontSize: '0.78rem', fontWeight: 700, color: '#6d28d9', marginBottom: '4px' }}>
+                    👥 Staff Costs & Payroll Derivation Formula
+                  </h5>
+                  <p style={{ margin: 0 }}>
+                    • <strong>Total Monthly Payroll (RM):</strong> Basic Salaries & Wages (<code style={{ background: '#e2e8f0', padding: '1px 4px', borderRadius: '3px' }}>901-1001</code>) + Employer EPF Pension (<code style={{ background: '#e2e8f0', padding: '1px 4px', borderRadius: '3px' }}>901-1002</code>) + SOCSO & EIS Statutory (<code style={{ background: '#e2e8f0', padding: '1px 4px', borderRadius: '3px' }}>901-1003/1004</code>) + Outsourced Contract Labour (<code style={{ background: '#e2e8f0', padding: '1px 4px', borderRadius: '3px' }}>901-2002</code>) + Staff Welfare (<code style={{ background: '#e2e8f0', padding: '1px 4px', borderRadius: '3px' }}>901-WELF</code>).<br/>
+                    • <strong>Payroll Cost Intensity (%):</strong> <code style={{ background: '#e2e8f0', padding: '1px 4px', borderRadius: '3px' }}>(Total Monthly Payroll / Total Operating Revenue) × 100</code><br/>
+                    • <strong>KL 4-Star Target Benchmark:</strong> <strong>35.0% - 40.0%</strong> of Revenue (Staffing Density: <strong>0.40 - 0.50 staff/room</strong>).
+                  </p>
+                </div>
+              </div>
             </div>
 
           </div>

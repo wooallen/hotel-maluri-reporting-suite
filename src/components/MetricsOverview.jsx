@@ -1,5 +1,5 @@
 import React from 'react';
-import { DollarSign, BedDouble, TrendingUp, TrendingDown, Percent, AlertCircle } from 'lucide-react';
+import { DollarSign, BedDouble, TrendingUp, TrendingDown, Percent, AlertCircle, Info } from 'lucide-react';
 
 export default function MetricsOverview({ currentMonth, prevMonth, auditResult }) {
   if (!currentMonth) return null;
@@ -56,72 +56,93 @@ export default function MetricsOverview({ currentMonth, prevMonth, auditResult }
   ];
 
   return (
-    <div style={{
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-      gap: '16px',
-      marginBottom: '24px'
-    }}>
-      {cards.map((card, i) => {
-        const IconComponent = card.icon;
-        return (
-          <div key={i} className="glass-card" style={{ padding: '20px', position: 'relative', overflow: 'hidden' }}>
-            
-            {card.warning && (
-              <div style={{
-                position: 'absolute',
-                top: '0',
-                right: '0',
-                background: 'var(--accent-rose)',
-                color: '#fff',
-                fontSize: '0.7rem',
-                fontWeight: 700,
-                padding: '2px 8px',
-                borderBottomLeftRadius: '8px'
-              }}>
-                RATE DILUTION ALERT
-              </div>
-            )}
-
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
-              <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)', letterSpacing: '0.04em' }}>
-                {card.title}
-              </span>
-              <div style={{
-                background: 'rgba(255, 255, 255, 0.05)',
-                padding: '8px',
-                borderRadius: '8px',
-                display: 'flex',
-                alignItems: 'center'
-              }}>
-                <IconComponent size={18} color={card.iconColor} />
-              </div>
-            </div>
-
-            <div className="metric-value" style={{ fontSize: '1.4rem', color: '#ffffff', marginBottom: '4px' }}>
-              {card.value}
-            </div>
-
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.78rem' }}>
-              <span style={{ color: 'var(--text-dim)' }}>{card.subtitle}</span>
+    <div style={{ marginBottom: '24px' }}>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+        gap: '16px',
+        marginBottom: '10px'
+      }}>
+        {cards.map((card, i) => {
+          const IconComponent = card.icon;
+          return (
+            <div key={i} className="glass-card" style={{ padding: '20px', position: 'relative', overflow: 'hidden' }}>
               
-              {card.trend && (
-                <span style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '2px',
-                  fontWeight: 600,
-                  color: card.trendUp ? '#10b981' : '#f43f5e'
+              {card.warning && (
+                <div style={{
+                  position: 'absolute',
+                  top: '0',
+                  right: '0',
+                  background: 'var(--accent-rose)',
+                  color: '#fff',
+                  fontSize: '0.7rem',
+                  fontWeight: 700,
+                  padding: '2px 8px',
+                  borderBottomLeftRadius: '8px'
                 }}>
-                  {card.trendUp ? <TrendingUp size={14} /> : <TrendingDown size={14} />}
-                  {card.trend}
-                </span>
+                  RATE DILUTION ALERT
+                </div>
               )}
-            </div>
 
-          </div>
-        );
-      })}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)', letterSpacing: '0.04em' }}>
+                  {card.title}
+                </span>
+                <div style={{
+                  background: 'rgba(255, 255, 255, 0.05)',
+                  padding: '8px',
+                  borderRadius: '8px',
+                  display: 'flex',
+                  alignItems: 'center'
+                }}>
+                  <IconComponent size={18} color={card.iconColor} />
+                </div>
+              </div>
+
+              <div className="metric-value" style={{ fontSize: '1.4rem', color: '#ffffff', marginBottom: '4px' }}>
+                {card.value}
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.78rem' }}>
+                <span style={{ color: 'var(--text-dim)' }}>{card.subtitle}</span>
+                
+                {card.trend && (
+                  <span style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '2px',
+                    fontWeight: 600,
+                    color: card.trendUp ? '#10b981' : '#f43f5e'
+                  }}>
+                    {card.trendUp ? <TrendingUp size={14} /> : <TrendingDown size={14} />}
+                    {card.trend}
+                  </span>
+                )}
+              </div>
+
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Accounting Derivation Footnote Strip */}
+      <div style={{
+        padding: '10px 16px',
+        background: 'rgba(15, 23, 42, 0.75)',
+        border: '1px solid rgba(255, 255, 255, 0.08)',
+        borderRadius: '8px',
+        fontSize: '0.75rem',
+        color: 'var(--text-muted)',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px',
+        backdropFilter: 'blur(4px)'
+      }}>
+        <Info size={14} color="#f59e0b" style={{ flexShrink: 0 }} />
+        <span>
+          <strong style={{ color: '#f59e0b' }}>Derivation Footnote:</strong> Total Room Revenue = GL 500-1000 (SC 500-1001 + NSC 500-1002). ADR = Room Revenue / Rooms Sold. RevPAR = Room Revenue / Available Rooms.
+        </span>
+      </div>
     </div>
   );
 }

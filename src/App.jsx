@@ -16,7 +16,7 @@ import BenchmarkOverview from './components/BenchmarkOverview';
 import { H1_2026_MONTHLY_DATA } from './constants/baselines';
 import { runFinancialAudit } from './services/auditEngine';
 import { getAllQuarters } from './services/quarterUtils';
-import { BedDouble, ShieldAlert, Server, Store, Users, Cpu, Sparkles } from 'lucide-react';
+import { BedDouble, ShieldAlert, Server, Store, Users, Cpu, Sparkles, BookOpen } from 'lucide-react';
 
 export default function App() {
   const [allMonths, setAllMonths] = useState(H1_2026_MONTHLY_DATA);
@@ -250,6 +250,72 @@ export default function App() {
             />
           )}
         </main>
+
+        {/* Accounting & Financial Derivation Footnote Card for Mission Control */}
+        <div className="glass-card" style={{
+          marginTop: '28px',
+          padding: '20px 24px',
+          background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9))',
+          borderColor: 'rgba(245, 158, 11, 0.3)',
+          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <div style={{ background: 'rgba(245, 158, 11, 0.15)', padding: '8px', borderRadius: '8px', border: '1px solid rgba(245, 158, 11, 0.3)' }}>
+                <BookOpen size={18} color="#f59e0b" />
+              </div>
+              <div>
+                <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: '#f59e0b', margin: 0 }}>
+                  Mission Control Accounting Footnote: Derivation of Revenue & Staff Costs
+                </h4>
+                <p style={{ fontSize: '0.76rem', color: 'var(--text-muted)', margin: 0 }}>
+                  Authoritative Chart of Accounts (COA) Mapping & Mathematical Calculation Methodology
+                </p>
+              </div>
+            </div>
+            <span style={{ fontSize: '0.72rem', background: 'rgba(245, 158, 11, 0.2)', color: '#fbbf24', border: '1px solid rgba(245, 158, 11, 0.4)', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>
+              GL COA v2.10
+            </span>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '16px', fontSize: '0.8rem', lineHeight: '1.6' }}>
+            
+            <div style={{ background: 'rgba(0, 0, 0, 0.3)', padding: '14px 16px', borderRadius: '8px', border: '1px solid rgba(255, 255, 255, 0.06)' }}>
+              <strong style={{ color: '#60a5fa', display: 'block', marginBottom: '6px', fontSize: '0.84rem' }}>
+                📈 1. Revenue Metrics Derivation
+              </strong>
+              <ul style={{ margin: 0, paddingLeft: '18px', color: 'var(--text-main)', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <li>
+                  <strong>Total Operating Revenue:</strong> Room Rev (<code style={{ color: '#93c5fd' }}>GL 500-1000</code>: SC <code style={{ color: '#93c5fd' }}>500-1001</code> + NSC <code style={{ color: '#93c5fd' }}>500-1002</code>) + F&B (<code style={{ color: '#93c5fd' }}>500-SR01</code> Serambi + <code style={{ color: '#93c5fd' }}>500-BF01</code> Breakfast + <code style={{ color: '#93c5fd' }}>500-3000</code> Banquet) + Tenancy Lease (<code style={{ color: '#93c5fd' }}>540-1000</code> Gajah3 @ RM 2,500/mo) + Ancillary (<code style={{ color: '#93c5fd' }}>500-1004</code> Laundry + <code style={{ color: '#93c5fd' }}>500-1003</code> Extra Charges).
+                </li>
+                <li>
+                  <strong>Average Daily Rate (ADR):</strong> Total Room Revenue (<code style={{ color: '#93c5fd' }}>500-1000</code>) ÷ Rooms Sold.
+                </li>
+                <li>
+                  <strong>RevPAR:</strong> Total Room Revenue (<code style={{ color: '#93c5fd' }}>500-1000</code>) ÷ Total Rooms Available (or Occupancy % × ADR).
+                </li>
+              </ul>
+            </div>
+
+            <div style={{ background: 'rgba(0, 0, 0, 0.3)', padding: '14px 16px', borderRadius: '8px', border: '1px solid rgba(255, 255, 255, 0.06)' }}>
+              <strong style={{ color: '#c084fc', display: 'block', marginBottom: '6px', fontSize: '0.84rem' }}>
+                👥 2. Staff Costs & Payroll Derivation
+              </strong>
+              <ul style={{ margin: 0, paddingLeft: '18px', color: 'var(--text-main)', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <li>
+                  <strong>Total Monthly Payroll:</strong> Basic Salaries (<code style={{ color: '#e9d5ff' }}>GL 901-1001</code>) + Employer EPF Pension (<code style={{ color: '#e9d5ff' }}>GL 901-1002</code>) + SOCSO/EIS Statutory (<code style={{ color: '#e9d5ff' }}>GL 901-1003/1004</code>) + Outsourced Contract Labour (<code style={{ color: '#e9d5ff' }}>GL 901-2002</code>) + Staff Welfare (<code style={{ color: '#e9d5ff' }}>GL 901-WELF</code>).
+                </li>
+                <li>
+                  <strong>Payroll Cost Intensity (%):</strong> (Total Monthly Payroll ÷ Total Combined Operating Revenue) × 100.
+                </li>
+                <li>
+                  <strong>KL 4-Star Industry Benchmark Target:</strong> <strong style={{ color: '#34d399' }}>35.0% – 40.0%</strong> of Revenue (Staffing Density: <strong>0.40 – 0.50 staff/room</strong>).
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
       </div>
 
       {/* Upload Spreadsheet Modal */}

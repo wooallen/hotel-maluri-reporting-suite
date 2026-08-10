@@ -92,5 +92,9 @@ ${(monthData.guestLaundry === 0 && occupancyPct > 50) ? '⚠️ NOTE: Guest Laun
 - Full P&L Breakeven Monthly Revenue: RM 722,766 / month (+53.0% top-line growth needed over RM 498k H1 avg).
 - Standalone Breakeven RevPAR Target: RM 131.09 / room night (e.g. 72% occupancy @ RM 182 ADR).
 - Dual-Engine Strategy Target RevPAR: RM 107.55 / room night (achieved with ~RM 103k/mo cost restructuring in labor & energy).
+
+8. FOOTNOTE: DERIVATION OF REVENUE & STAFF COST NUMBERS
+- Revenue Derivation: Total Revenue = Room Revenue (GL 500-1000: SC 500-1001 + NSC 500-1002) + F&B Revenue (Serambi 500-SR01 + Breakfast 500-BF01 + Banquet 500-3000) + Tenancy Lease (540-1000 Gajah3 Lease @ RM 2,500/mo) + Ancillary Revenue (Laundry 500-1004 + Extra Charges 500-1003). ADR = Room Revenue / Rooms Sold. RevPAR = Room Revenue / Total Rooms Available (or Occupancy % x ADR).
+- Staff Costs Derivation: Total Monthly Payroll & Staff Costs = Basic Salaries & Wages (GL 901-1001) + EPF Employer Pension (GL 901-1002) + SOCSO/EIS Statutory (GL 901-1003/1004) + Outsourced Labour Fees (GL 901-2002) + Staff Welfare & Expenses (GL 901-WELF). Payroll Intensity (%) = (Total Monthly Payroll & Staff Costs / Total Combined Operating Revenue) x 100 [KL 4-Star Benchmark Target: 35.0% - 40.0%].
 `;
 }
