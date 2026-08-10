@@ -1,28 +1,31 @@
 ---
 name: financial-statement-benchmarking
-description: Guidelines and workflows for analyzing hotel financial statements, P&L line items, payroll intensity, and overhead variances. MANDATORY: Leverages Google NotebookLM (MCP tools and nlm CLI) to source hotel industry benchmarks, labor market standards, and operational best practices.
+description: Guidelines and workflows for analyzing hotel financial statements, P&L line items, payroll intensity, and overhead variances against 4-star hotels in Kuala Lumpur. MANDATORY: Automatically ingests uploaded files and leverages Google NotebookLM (via MCP tools or nlm CLI) to compare performance against KL 4-star hotel benchmarks every time a new file is introduced.
 ---
 
-# Financial Statement Analysis & Industry Benchmarking Skill
+# Financial Statement Analysis & KL 4-Star Industry Benchmarking Skill
 
-Use this skill whenever analyzing hotel P&L financial statements, line-item account variances, payroll intensity, utility run-rates, or operational overheads.
+Use this skill whenever analyzing hotel P&L financial statements, line-item account variances, payroll intensity, utility run-rates, or operational overheads, or whenever a new financial document/report is uploaded.
 
-## Mandatory Step 1: Query & Research via NotebookLM
-When conducting any financial statement audit or variance analysis:
+## Mandatory Step 1: Automatic NotebookLM Research & KL 4-Star Benchmarking
+Whenever a new financial report or statement file is uploaded or analyzed:
 
-1. **Check Existing NotebookLM Research Notebooks**:
-   - Query existing NotebookLM notebooks (such as `Hotel Maluri Payroll & Financial Analysis` or general hospitality benchmarks) using `mcp__notebooklm__notebook_list` or `mcp__notebooklm__notebook_query`.
-   - Ask specific benchmark questions, e.g.:
-     - *"What is the standard payroll-to-revenue ratio for 3-star and 4-star city hotels in Kuala Lumpur?"*
-     - *"What is the recommended staff-to-room ratio for a 150-room midscale hotel at 55% occupancy?"*
-     - *"What are typical hotel utility intensity benchmarks (kWh / occupied room night) in tropical climates?"*
+1. **Ingest Uploaded File / Operational Summary into NotebookLM**:
+   - Add the uploaded file or extracted performance metrics into the dedicated NotebookLM benchmark notebook (`Hotel Maluri & KL 4-Star Hospitality Benchmarks`, ID: `0b8be7b0-5f0b-4897-a3e9-d442fc8717fc`) using `nlm source add` or MCP tools.
 
-2. **Ingest Target Benchmarking Sources**:
-   - If new research papers, market reports, web URLs, or P&L baselines are introduced, ingest them into the relevant NotebookLM notebook using `mcp__notebooklm__notebook_add_url` or `mcp__notebooklm__notebook_add_text` (or `nlm source add`).
+2. **Query & Benchmark Against KL 4-Star Hotel Peer Group**:
+   - Query NotebookLM for 4-star hotel benchmarks in Kuala Lumpur across key metrics:
+     - **Occupancy Rate**: KL 4-Star Benchmark Target = 65% – 72%
+     - **Average Daily Rate (ADR)**: KL 4-Star Benchmark Target = RM 240 – RM 310
+     - **Revenue Per Available Room (RevPAR)**: KL 4-Star Benchmark Target = RM 160 – RM 220
+     - **Payroll-to-Revenue Ratio**: Target ≤ 35.0% (Ceiling: 38.0%)
+     - **Staff-to-Room Ratio**: Target = 0.40 – 0.55 staff/room (~60–80 staff for 150 rooms)
+     - **Gross Operating Profit (GOP) Margin**: Target = +30.0% – 36.0%
+     - **F&B Revenue Contribution**: Target = 25.0% – 35.0% of total revenue
 
-3. **Incorporate Benchmark Knowledge into Financial Reports**:
-   - Synthesize NotebookLM query results directly into P&L variance analysis, executive memos, and mission control dashboards.
-   - Highlight line items that exceed industry targets (e.g. Payroll > 35-40% benchmark, EPF statutory contribution anomalies, utility run-rate spikes).
+3. **Incorporate Comparative Benchmark Variance Analysis into Reports**:
+   - Synthesize NotebookLM query results into all variance analysis memos, dashboards, and financial reviews.
+   - Flag critical negative variances (e.g. ADR discount vs 4-star peers, RevPAR deficit, payroll cost overruns exceeding 35% revenue target).
 
 ## Step 2: Departmental Demand Sizing & RevPAR Coverage Modeling
 1. **Model Core Staffing Demand**:

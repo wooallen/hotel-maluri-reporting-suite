@@ -392,6 +392,92 @@ export default function ExecutiveMemoModal({ isOpen, onClose, allMonths = [], cu
               </div>
             </div>
 
+            {/* KL 4-Star Hotel Industry Benchmarking & Strategic Recommendations (NotebookLM Ingested) */}
+            <div className="paper-card" style={{
+              background: '#f8fafc',
+              border: '1.5px solid #3b82f6',
+              borderRadius: '12px',
+              padding: '18px',
+              marginBottom: '20px'
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                <div style={{ fontSize: '0.72rem', fontWeight: 800, color: '#1d4ed8', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+                  KUALA LUMPUR 4-STAR HOTEL BENCHMARK COMPARISON · YTD 2026 (NOTEBOOKLM ANALYSIS)
+                </div>
+                <span style={{ background: '#dbeafe', color: '#1e40af', fontSize: '0.68rem', fontWeight: 800, padding: '2px 8px', borderRadius: '4px', border: '1px solid #93c5fd' }}>
+                  4-STAR PEER BENCHMARK
+                </span>
+              </div>
+
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.78rem', marginBottom: '14px' }}>
+                <thead>
+                  <tr style={{ background: '#e2e8f0', color: '#0f172a', textAlign: 'left', borderBottom: '1px solid #cbd5e1' }}>
+                    <th style={{ padding: '6px 8px', fontWeight: 700 }}>Performance Metric</th>
+                    <th style={{ padding: '6px 8px', fontWeight: 700 }}>Hotel Maluri (YTD 2026)</th>
+                    <th style={{ padding: '6px 8px', fontWeight: 700 }}>KL 4-Star Benchmark</th>
+                    <th style={{ padding: '6px 8px', fontWeight: 700 }}>Variance</th>
+                    <th style={{ padding: '6px 8px', fontWeight: 700 }}>Operational Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style={{ borderBottom: '1px solid #e2e8f0' }}>
+                    <td style={{ padding: '6px 8px', fontWeight: 600 }}>Occupancy Rate</td>
+                    <td style={{ padding: '6px 8px', fontWeight: 700 }}>53.62%</td>
+                    <td style={{ padding: '6px 8px' }}>68.50% (65–72%)</td>
+                    <td style={{ padding: '6px 8px', color: '#b91c1c', fontWeight: 700 }}>-14.88 pts</td>
+                    <td style={{ padding: '6px 8px', color: '#b91c1c', fontWeight: 700 }}>21.7% Shortfall</td>
+                  </tr>
+                  <tr style={{ borderBottom: '1px solid #e2e8f0', background: '#f1f5f9' }}>
+                    <td style={{ padding: '6px 8px', fontWeight: 600 }}>Average Daily Rate (ADR)</td>
+                    <td style={{ padding: '6px 8px', fontWeight: 700 }}>RM 161.68</td>
+                    <td style={{ padding: '6px 8px' }}>RM 265.00 (RM 240–310)</td>
+                    <td style={{ padding: '6px 8px', color: '#b91c1c', fontWeight: 700 }}>-RM 103.32 (-39.0%)</td>
+                    <td style={{ padding: '6px 8px', color: '#b91c1c', fontWeight: 700 }}>Deep Rate Discount</td>
+                  </tr>
+                  <tr style={{ borderBottom: '1px solid #e2e8f0' }}>
+                    <td style={{ padding: '6px 8px', fontWeight: 600 }}>RevPAR Yield</td>
+                    <td style={{ padding: '6px 8px', fontWeight: 700 }}>RM 86.69</td>
+                    <td style={{ padding: '6px 8px' }}>RM 181.53 (RM 160–220)</td>
+                    <td style={{ padding: '6px 8px', color: '#b91c1c', fontWeight: 700 }}>-RM 94.84 (-52.2%)</td>
+                    <td style={{ padding: '6px 8px', color: '#b91c1c', fontWeight: 700 }}>Yield Deficit</td>
+                  </tr>
+                  <tr style={{ borderBottom: '1px solid #e2e8f0', background: '#f1f5f9' }}>
+                    <td style={{ padding: '6px 8px', fontWeight: 600 }}>Payroll-to-Revenue Ratio</td>
+                    <td style={{ padding: '6px 8px', fontWeight: 700, color: '#b91c1c' }}>50.55%</td>
+                    <td style={{ padding: '6px 8px' }}>35.00% (Ceiling: 38%)</td>
+                    <td style={{ padding: '6px 8px', color: '#b91c1c', fontWeight: 700 }}>+15.55 pts (+37.5%)</td>
+                    <td style={{ padding: '6px 8px', color: '#b91c1c', fontWeight: 700 }}>Critical Overrun</td>
+                  </tr>
+                  <tr style={{ borderBottom: '1px solid #e2e8f0' }}>
+                    <td style={{ padding: '6px 8px', fontWeight: 600 }}>Staffing Density</td>
+                    <td style={{ padding: '6px 8px', fontWeight: 700 }}>~0.60 staff/room</td>
+                    <td style={{ padding: '6px 8px' }}>0.45 staff/room</td>
+                    <td style={{ padding: '6px 8px', color: '#d97706', fontWeight: 700 }}>+0.15 staff/room</td>
+                    <td style={{ padding: '6px 8px', color: '#d97706', fontWeight: 700 }}>Over-staffed vs Demand</td>
+                  </tr>
+                  <tr style={{ background: '#f1f5f9' }}>
+                    <td style={{ padding: '6px 8px', fontWeight: 600 }}>Net Margin / GOP</td>
+                    <td style={{ padding: '6px 8px', fontWeight: 700, color: '#b91c1c' }}>-30.46% Net Margin</td>
+                    <td style={{ padding: '6px 8px' }}>+32.50% GOP Target</td>
+                    <td style={{ padding: '6px 8px', color: '#b91c1c', fontWeight: 700 }}>-62.96 pts</td>
+                    <td style={{ padding: '6px 8px', color: '#b91c1c', fontWeight: 700 }}>Operating Loss (-RM 877k)</td>
+                  </tr>
+
+                </tbody>
+              </table>
+
+              <div style={{ background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: '8px', padding: '12px' }}>
+                <h4 style={{ fontSize: '0.8rem', fontWeight: 800, color: '#1e40af', marginBottom: '6px', textTransform: 'uppercase' }}>
+                  🎯 Key Strategic Operational Recommendations
+                </h4>
+                <ol style={{ paddingLeft: '18px', margin: 0, fontSize: '0.78rem', color: '#1e293b', lineHeight: '1.6' }}>
+                  <li><strong>1. Rate & ADR Restructuring:</strong> Elevate ADR from RM 161.68 toward the RM 210–240 target range to capture 4-star positioning yield. A RM 40 ADR increase yields ~RM 574,000 incremental revenue annually with near-zero marginal cost.</li>
+                  <li><strong>2. Payroll & Labor Right-Sizing:</strong> Reduce payroll intensity from 50.55% down to the 35.0% target ceiling through demand-matched flexible shift scheduling and optimizing staff-to-room ratio to 0.45 staff/room (~67 FTEs for 148 rooms).</li>
+                  <li><strong>3. F&B & Banquet Expansion:</strong> Increase F&B + Banquet revenue contribution from 17.36% to 25.0%–28.0% by re-activating local corporate banquet hall packages and marketing outsource dining partnerships.</li>
+                </ol>
+              </div>
+            </div>
+
             {/* Audit Alerts Box */}
             {alerts && alerts.length > 0 && (
               <div style={{ marginBottom: '20px' }}>
@@ -434,6 +520,7 @@ export default function ExecutiveMemoModal({ isOpen, onClose, allMonths = [], cu
             </div>
 
           </div>
+
 
           {/* ========================================================================= */}
           {/* PAGE 2: ROOM DIVISION & YIELD MANAGEMENT */}

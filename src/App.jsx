@@ -11,6 +11,8 @@ import VendorContractsTab from './components/Tabs/VendorContractsTab';
 import AncillaryTab from './components/Tabs/AncillaryTab';
 import PayrollTab from './components/Tabs/PayrollTab';
 
+import BenchmarkOverview from './components/BenchmarkOverview';
+
 import { H1_2026_MONTHLY_DATA } from './constants/baselines';
 import { runFinancialAudit } from './services/auditEngine';
 import { BedDouble, ShieldAlert, Server, Store, Users, Cpu, Sparkles } from 'lucide-react';
@@ -124,6 +126,9 @@ export default function App() {
 
         {/* Audit Alerts Banner */}
         <AuditAlertsBanner alerts={auditResult.alerts} />
+
+        {/* Kuala Lumpur 4-Star Hotel Benchmarking & Strategic Recommendations */}
+        <BenchmarkOverview />
 
         {/* Top KPI Metrics Bar */}
         <MetricsOverview monthData={currentMonth} auditResult={auditResult} />
